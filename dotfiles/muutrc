@@ -1,0 +1,33 @@
+source ~/.mutt/colors
+
+set from = "carlos.dagostino@gmail.com"
+set realname = "Carlos D."
+set imap_user = "carlos.dagostino@gmail.com"
+set imap_pass = "hahahano"
+
+##REMOTE GMAIL FOLDERS
+set folder = "imaps://imap.gmail.com:993"
+set spoolfile = "+INBOX"
+set postponed ="+[Google Mail]/Drafts"
+#set trash = "+[Google Mail]/Trash"
+set smtp_authenticators = 'gssapi:login'
+
+##SMTP Settings to sent email
+set smtp_url = "smtp://carlos.dagostino@smtp.gmail.com:587/"
+set smtp_pass = "hahahahaayeahno"
+
+##LOCAL FOLDERS FOR CACHED HEADERS AND CERTIFICATES
+set header_cache =~/.mutt/cache/headers
+set message_cachedir =~/.mutt/cache/bodies
+set certificate_file =~/.mutt/certificates
+
+##SECURING
+set move = no #Stop asking to "move read messages to mbox"!
+set imap_keepalive = 900
+
+##Sort by newest conversation first.
+set sort = reverse-threads
+set sort_aux = last-date-received
+
+##Set editor to create new email
+set editor='vim'
