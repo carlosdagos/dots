@@ -4,14 +4,18 @@
 # the damn time
 #
 
+function smm_log_date {
+  date +%Y-%m-%d.%H:%M:%S
+}
+
 function log_info {
-	echo "[INFO] $1"
+  echo "[$(smm_log_date)] [INFO]: $1"
 }
 
 function log_warning {
-	echo "[WARN] $1"
+  echo "[$(smm_log_date)][WARN]: $1"
 }
 
 function log_error {
-	echo "[ERR] $1"
+  echo "[$(smm_log_date)][ERR]: $1"
 }

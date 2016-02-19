@@ -1,0 +1,10 @@
+#
+# Ignore them swap files
+# At some point I _should_ set
+# my vim swap files to another
+# directory, but you know.. I'm lazy :D
+#
+# I mean, I'm scripting my entire setup
+# so what can be expected from me?
+#
+**.swp
