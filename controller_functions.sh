@@ -76,6 +76,7 @@ function install_brew_cask_programs {
 function brew_cleanup {
   brew cleanup
   brew cask cleanup
+  return 0
 }
 
 #
