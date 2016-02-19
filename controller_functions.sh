@@ -44,9 +44,11 @@ function install_brew {
 #
 function install_brew_programs {
   log_info "Installing brews"
+  # Get me my dupes
+  brew tap homebrew/dupes
   brew update
   brew install $(read_list_file "fixtures/brews.txt")
-  return $?
+  return 0 # Dupes will sometimes return status 1.. so fixed for now
 }
 
 #
@@ -77,8 +79,28 @@ function brew_cleanup {
 }
 
 #
+# Some commands for post install
+#
+function post_install_commands {
+  # Set up zsh as shell for my user
+  if [[ $SHELL != "/bin/zsh" ]]; then
+    log_info "Setting ZSH as main shell"
+    chsh -s /bin/zsh
+    sudo chsh -s /bin/zsh
+  fi
+
+  if [[ ! -d ~/.oh-my-zsh ]]; then
+    # Go to https://github.com/robbyrussell/oh-my-zsh
+    sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+  fi
+
+  log_info "Post install commands finished"
+}
+
+#
 # Set up my dotfiles and keep it all in order
 #
 function setup_dotfiles {
+  log_info "Setting up your dotfiles"
   return 0
 }

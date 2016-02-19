@@ -19,6 +19,7 @@ function main {
     install_brew_cask_programs
     install_brew_programs
     brew_cleanup
+    post_install_commands
     setup_dotfiles
   )
 
