@@ -123,5 +123,8 @@ function setup_dotfiles {
 
   soft_link "dotfiles/ghci" "$HOME/.ghci"
 
+
+  soft_link "dotfiles/vimrc" "$HOME/.vimrc" 
+
   return 0
 }
