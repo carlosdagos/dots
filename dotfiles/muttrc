@@ -1,33 +1,74 @@
+#
+# Don't need any downloading of email,
+# maybe later
+#
 source ~/.mutt/colors
+
+set my_pass = "`1pass --path ~/Dropbox/1Password/1Password.agilekeychain GoogleMutt`"
 
 set from = "carlos.dagostino@gmail.com"
 set realname = "Carlos D."
 set imap_user = "carlos.dagostino@gmail.com"
-set imap_pass = "hahahano"
+set imap_pass = "$my_pass"
 
-##REMOTE GMAIL FOLDERS
+# Remote Gmail Folders
 set folder = "imaps://imap.gmail.com:993"
 set spoolfile = "+INBOX"
 set postponed ="+[Google Mail]/Drafts"
-#set trash = "+[Google Mail]/Trash"
+set trash = "+[Google Mail]/Trash"
 set smtp_authenticators = 'gssapi:login'
 
-##SMTP Settings to sent email
+# SMTP Settings to send email
 set smtp_url = "smtp://carlos.dagostino@smtp.gmail.com:587/"
-set smtp_pass = "hahahahaayeahno"
+set smtp_pass = "$my_pass"
 
-##LOCAL FOLDERS FOR CACHED HEADERS AND CERTIFICATES
+# Local folders for caching
 set header_cache =~/.mutt/cache/headers
 set message_cachedir =~/.mutt/cache/bodies
 set certificate_file =~/.mutt/certificates
 
-##SECURING
-set move = no #Stop asking to "move read messages to mbox"!
-set imap_keepalive = 900
-
-##Sort by newest conversation first.
-set sort = reverse-threads
-set sort_aux = last-date-received
-
-##Set editor to create new email
+# Set editor to create new email
 set editor='vim'
+
+# main options
+set realname   = "Carlos D."
+set mail_check = 0
+set envelope_from
+set send_charset="utf-8"
+
+unset move 
+set delete           
+unset confirmappend 
+set quit           
+unset mark_old    
+
+# sort/threading
+set sort     = threads
+set sort_aux = reverse-last-date-received
+set sort_re
+
+# look and feel
+set pager_index_lines = 8
+set pager_context     = 5
+set pager_stop
+set menu_scroll
+set smart_wrap
+set tilde
+unset markers
+
+# composing
+set fcc_attach
+unset mime_forward
+set forward_format = "Fwd: %s"
+set include
+set forward_quote
+
+source ~/.mutt/accounts/personal
+
+ignore *                               # first, ignore all headers
+unignore from: to: cc: date: subject:  # then, show only these
+hdr_order from: to: cc: date: subject: # and in this order
+
+# Contacts
+set query_command = "contacts '%s' && contacts '%s'"
+bind editor <Tab> complete-query
