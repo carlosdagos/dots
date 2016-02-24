@@ -8,7 +8,6 @@ automake
 bfg # To clean them huge git repos
 boost
 cabal-install
-cask
 cloog018
 cmake
 composer
@@ -86,3 +85,4 @@ watch
 wget
 xz
 zsh
+swig
