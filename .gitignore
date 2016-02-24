@@ -8,3 +8,8 @@
 # so what can be expected from me?
 #
 **.swp
+
+#
+# Ignore the log file
+#
+smm.log

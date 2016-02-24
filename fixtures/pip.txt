@@ -1,0 +1,11 @@
+1pass
+fuzzywuzzy
+httpie
+M2Crypto
+pip
+Pygments
+python-Levenshtein
+requests
+setuptools
+vboxapi
+wheel

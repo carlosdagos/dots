@@ -4,4 +4,4 @@
 
 source controller_functions.sh
 
-setup_only_dotfiles
+setup_dotfiles

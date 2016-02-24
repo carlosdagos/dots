@@ -24,6 +24,8 @@ Plugin 'derekwyatt/vim-scala'
 Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
 Plugin 'rodjek/vim-puppet'
 Plugin 'kchmck/vim-coffee-script'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'neovimhaskell/haskell-vim'
 
 Bundle 'wikitopian/hardmode'
 Bundle 'w0ng/vim-hybrid'

@@ -7,3 +7,4 @@ TODO
 - Set up iTerm font programatically
 - Set up iTerm programatically to start with ~/.tmux/start.sh
 - Set OS X dark "theme" programatically
+- Consider switching to `fish` shell
