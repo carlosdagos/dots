@@ -21,3 +21,8 @@ smm.log
 dotfiles/mutt/cache/headers
 dotfiles/mutt/certificates
 dotfiles/mutt/cache/bodies
+
+#
+# Ignore tmux plugins
+#
+dotfiles/tmux/plugins

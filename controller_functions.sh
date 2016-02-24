@@ -14,7 +14,7 @@ function setup_directories {
   # First make this program's directory
   mkdir -p $SMM_DIR
   # Then make all the rest of the stuff
-  mkdir -p "$(read_list_file 'fixtures/directories.txt')"
+  mkdir -p $(read_list_file 'fixtures/directories.txt')
   return 0
 }
 
@@ -47,7 +47,7 @@ function install_brew_programs {
   # Get me my dupes
   brew tap homebrew/dupes
   brew update
-  brew install "$(read_list_file 'fixtures/brews.txt')"
+  brew install $(read_list_file 'fixtures/brews.txt')
   return 0 # Dupes will sometimes return status 1.. so fixed for now
 }
 
@@ -56,7 +56,7 @@ function install_brew_programs {
 #
 function install_brew_cask {
   $SMM_INSTALL_HOMEBREW_CASK
-  return 0
+  return 0 
 }
 
 #
@@ -65,7 +65,7 @@ function install_brew_cask {
 function install_brew_cask_programs {
   log_info "Installing casks"
   brew cask update
-  brew cask install "$(read_list_file 'fixtures/brew_casks.txt')"
+  brew cask install $(read_list_file 'fixtures/brew_casks.txt')
   return $?
 }
 
@@ -105,6 +105,12 @@ function post_install_commands {
     # Install Vundle
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
   fi
+  
+  # TPM not installed
+  if [[ ! -d ~/.tmux/plugins/tpm ]]; then
+    log_info "Installing tmux tpm"
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+  fi
 
   # Check if goobook has authenticated
   if [[ ! -f ~/.goobook_auth ]]; then
@@ -119,7 +125,8 @@ function post_install_commands {
 # Does `pip install ...`
 #
 function install_pips {
-  pip install "$(read_list_file 'fixtures/pip.txt')"
+  pip install --upgrade pip
+  sudo -H pip install $(read_list_file 'fixtures/pip.txt')
   return 0 # Return as fixed in case some are already installed
 }
 
