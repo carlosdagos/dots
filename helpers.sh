@@ -35,7 +35,7 @@ function setup_my_mac_set_status {
 }
 
 #
-# Create soft links or leave them alone
+# Create soft links forcefully
 #
 function soft_link {
   local src=$PWD/$1
@@ -44,7 +44,7 @@ function soft_link {
   log_info "Setting up soft link $src -> $lndst"
   
   mkdir -p $(dirname "$lndst")
-  ln -sv "$src" "$lndst"
+  ln -sfv "$src" "$lndst"
 
   if [[ ! $? -eq 0 ]]; then
     log_warning "Could not set up soft link $src -> $lndst"

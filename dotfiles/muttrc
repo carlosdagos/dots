@@ -36,11 +36,11 @@ set mail_check = 0
 set envelope_from
 set send_charset="utf-8"
 
-unset move 
-set delete           
-unset confirmappend 
-set quit           
-unset mark_old    
+unset move
+set delete
+unset confirmappend
+set quit
+unset mark_old
 
 # sort/threading
 set sort     = threads
@@ -56,6 +56,12 @@ set smart_wrap
 set tilde
 unset markers
 
+# Get email from imap
+# This key is being remapped, but
+# I find it useful here, because
+# I don't need the default mapping
+bind index "G" imap-fetch-mail
+
 # composing
 set fcc_attach
 unset mime_forward
@@ -70,5 +76,5 @@ unignore from: to: cc: date: subject:  # then, show only these
 hdr_order from: to: cc: date: subject: # and in this order
 
 # Contacts
-set query_command = "contacts '%s' && contacts '%s'"
+set query_command = "goobook query %s"
 bind editor <Tab> complete-query

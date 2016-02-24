@@ -50,7 +50,6 @@ macvim
 maven
 mpfr2
 mtr
-mutt # Read my emails on my console? yes pls
 mysql
 node
 oniguruma

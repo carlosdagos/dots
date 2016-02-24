@@ -92,16 +92,24 @@ function post_install_commands {
     sudo chsh -s /bin/zsh
   fi
 
+  # Check if oh-my-zsh is downloaded
   if [[ ! -d ~/.oh-my-zsh ]]; then
     log_info "Installing oh-my-zsh"
     # Go to https://github.com/robbyrussell/oh-my-zsh
     sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
   fi
 
+  # Check if Vundle is installed
   if [[ ! -d ~/.vim/bundle/Vundle.vim ]]; then
     log_info "Installing Vundle"
     # Install Vundle
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+  fi
+
+  # Check if goobook has authenticated
+  if [[ ! -f ~/.goobook_auth ]]; then
+    # goobook needs to authenticate
+    goobook authenticate
   fi
 
   log_info "Post install commands finished"
@@ -121,10 +129,15 @@ function install_pips {
 function setup_dotfiles {
   log_info "Setting up your dotfiles"
 
-  soft_link "dotfiles/ghci" "$HOME/.ghci"
-
-
-  soft_link "dotfiles/vimrc" "$HOME/.vimrc" 
+  soft_link "dotfiles/ghci"                        "$HOME/.ghci"
+  soft_link "dotfiles/vimrc"                       "$HOME/.vimrc"
+  soft_link "dotfiles/muttrc"                      "$HOME/.muttrc"
+  soft_link "dotfiles/mutt"                        "$HOME/.mutt"
+  soft_link "dotfiles/msmtprc"                     "$HOME/.msmtprc"
+  soft_link "dotfiles/zshrc"                       "$HOME/.zshrc"
+  soft_link "dotfiles/oh-my-zsh/myusuf3.zsh-theme" "$HOME/.oh-my-zsh/themes/myusuf3.zsh-theme"
+  soft_link "dotfiles/tmux"                        "$HOME/.tmux"
+  soft_link "dotfiles/tmux/tmux.conf"              "$HOME/.tmux.conf"
 
   return 0
 }

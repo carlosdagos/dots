@@ -13,3 +13,11 @@
 # Ignore the log file
 #
 smm.log
+
+#
+# Ignore certificate files
+# and cache
+#
+dotfiles/mutt/cache/headers
+dotfiles/mutt/certificates
+dotfiles/mutt/cache/bodies
