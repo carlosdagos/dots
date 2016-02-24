@@ -14,7 +14,8 @@ set imap_pass = "$my_pass"
 # Remote Gmail Folders
 set folder = "imaps://imap.gmail.com:993"
 set spoolfile = "+INBOX"
-set postponed ="+[Google Mail]/Drafts"
+set record = "[+Gmail]/Sent Mail"
+set postponed = "+[Google Mail]/Drafts"
 set trash = "+[Google Mail]/Trash"
 set smtp_authenticators = 'gssapi:login'
 
