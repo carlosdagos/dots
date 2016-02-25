@@ -35,11 +35,18 @@ function setup_my_mac_set_status {
 }
 
 #
-# Create soft links forcefully
+# Create soft links, unless they're
+# already there
 #
 function soft_link {
   local src=$PWD/$1
   local lndst=$2
+
+  # if already exists and it a link
+  if [[ -L $2 ]]; then
+    log_info "$2 already exists"
+    return 0
+  fi
 
   log_info "Setting up soft link $src -> $lndst"
   
@@ -48,6 +55,9 @@ function soft_link {
 
   if [[ ! $? -eq 0 ]]; then
     log_warning "Could not set up soft link $src -> $lndst"
+    return 1
+  else
+    return 0
   fi
 }
 

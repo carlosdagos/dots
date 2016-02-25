@@ -23,13 +23,14 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'benmills/vimux'
-Plugin 'derekwyatt/vim-scala'
 Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
 Plugin 'rodjek/vim-puppet'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'neovimhaskell/haskell-vim'
+Plugin 'derekwyatt/vim-scala'
 
+" old Vundle stuff
 Bundle 'wikitopian/hardmode'
 Bundle 'w0ng/vim-hybrid'
 Bundle 'gosukiwi/vim-atom-dark'
