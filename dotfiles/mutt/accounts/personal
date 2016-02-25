@@ -1,14 +1,14 @@
 set from      = "carlos.dagostino@gmail.com"
 set sendmail  = "msmtp -a Personal"
-set mbox      = "+Personal/[Gmail].All Mail"
-set postponed = "+Personal/[Gmail].Drafts"
+set mbox      = "+[Gmail].All Mail"
+set postponed = "+[Gmail].Drafts"
 
 color status green default
 
 macro index d \
-    "<save-message>+Personal/[Gmail].Trash<enter>" \
+    "<save-message>+[Gmail].Trash<enter>" \
     "move message to the trash"
 
 macro index S \
-    "<save-message>+Personal/[Gmail].Spam<enter>"  \
+    "<save-message>+[Gmail].Spam<enter>"  \
     "mark message as spam"

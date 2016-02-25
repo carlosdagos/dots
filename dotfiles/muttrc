@@ -3,6 +3,7 @@
 # maybe later
 #
 source ~/.mutt/colors
+source ~/.mutt/accounts/personal
 
 set my_pass = "`1pass --path ~/Dropbox/1Password/1Password.agilekeychain GoogleMutt`"
 
@@ -14,8 +15,8 @@ set imap_pass = "$my_pass"
 # Remote Gmail Folders
 set folder = "imaps://imap.gmail.com:993"
 set spoolfile = "+INBOX"
-set record = "[+Gmail]/Sent Mail"
-set postponed = "+[Google Mail]/Drafts"
+set record = "+Personal/[Gmail].Sent Mail"
+set postponed = "+Personal/[Gmail].Drafts"
 set trash = "+[Google Mail]/Trash"
 set smtp_authenticators = 'gssapi:login'
 
@@ -69,8 +70,6 @@ unset mime_forward
 set forward_format = "Fwd: %s"
 set include
 set forward_quote
-
-source ~/.mutt/accounts/personal
 
 ignore *                               # first, ignore all headers
 unignore from: to: cc: date: subject:  # then, show only these
