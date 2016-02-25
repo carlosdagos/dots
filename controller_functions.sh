@@ -118,6 +118,17 @@ function post_install_commands {
     goobook authenticate
   fi
 
+  # Check if my favorite theme is installed
+  if [[ ! -d ~/.vim/bundle/dracula-theme ]]; then
+    vim +PluginInstall +qall 
+    # I'm lazy and assuming that last thing worked but
+    # we're not done, we must now patch that sumbitch
+    local patchsrc=$PWD/dotfiles/vim/dracula-theme.diff
+    pushd ~/.vim/bundle/dracula-theme
+    git apply $patchsrc
+    popd # return to original dir
+  fi
+
   log_info "Post install commands finished"
 }
 
