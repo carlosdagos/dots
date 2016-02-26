@@ -58,11 +58,12 @@ set smart_wrap
 set tilde
 unset markers
 
-# Get email from imap
-# This key is being remapped, but
-# I find it useful here, because
-# I don't need the default mapping
-bind index "G" imap-fetch-mail
+# my own bidndings
+bind index "G" imap-fetch-mail     # I don't need the default binding
+bind index ")" next-page           # go to next and prev page with parens
+bind index "(" previous-page
+bind index "<Enter>" sort-mailbox  # switch these bindings
+bind index "o" display-message
 
 # composing
 set fcc_attach
