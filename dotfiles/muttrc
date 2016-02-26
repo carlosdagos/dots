@@ -13,11 +13,11 @@ set imap_user = "carlos.dagostino@gmail.com"
 set imap_pass = "$my_pass"
 
 # Remote Gmail Folders
-set folder = "imaps://imap.gmail.com:993"
+set folder    = "imaps://imap.gmail.com:993"
 set spoolfile = "+INBOX"
-set record = "+Personal/[Gmail].Sent Mail"
-set postponed = "+Personal/[Gmail].Drafts"
-set trash = "+[Google Mail]/Trash"
+set record    = "+/[Gmail].Sent Mail"
+set postponed = "+/[Gmail].Drafts"
+set trash     = "+[Gmail]/Trash"
 set smtp_authenticators = 'gssapi:login'
 
 # SMTP Settings to send email
@@ -33,10 +33,10 @@ set certificate_file =~/.mutt/certificates
 set editor='vim'
 
 # main options
-set realname   = "Carlos D."
-set mail_check = 0
+set realname     = "Carlos D."
+set mail_check   = 0
 set envelope_from
-set send_charset="utf-8"
+set send_charset = "utf-8"
 
 unset move
 set delete
@@ -59,10 +59,10 @@ set tilde
 unset markers
 
 # my own bidndings
-bind index "G" imap-fetch-mail     # I don't need the default binding
-bind index ")" next-page           # go to next and prev page with parens
+bind index "G" imap-fetch-mail      # I don't need the default binding
+bind index ")" next-page            # go to next and prev page with parens
 bind index "(" previous-page
-bind index "<Enter>" sort-mailbox  # switch these bindings
+bind index "<Return>" sort-mailbox  # switch these bindings
 bind index "o" display-message
 
 # composing
