@@ -62,8 +62,6 @@ unset markers
 bind index "G" imap-fetch-mail      # I don't need the default binding
 bind index ")" next-page            # go to next and prev page with parens
 bind index "(" previous-page
-bind index "<Return>" sort-mailbox  # switch these bindings
-bind index "o" display-message
 
 # composing
 set fcc_attach
