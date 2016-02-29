@@ -41,7 +41,7 @@ filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 
-" Put your non-Plugin stuff after this line
+" Non-Plugin stuff after this line
 
 " Function for number toggle
 function! NumberToggle()
@@ -66,6 +66,16 @@ endfunc
 
 nnoremap <C-T> :call WhitespaceToggle()<cr>
 
+" Remappings
+"    Disable arrows 
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+"    Nerdtree
+map <C-F> :NERDTreeToggle<CR>
+
+" Other options
 set t_Co=256
 set relativenumber
 set number
@@ -76,8 +86,3 @@ syntax on
 set tabstop=2
 set shiftwidth=2
 set expandtab
-" Disable arrow keys
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
