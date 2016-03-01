@@ -68,15 +68,15 @@ nnoremap <C-T> :call WhitespaceToggle()<cr>
 
 " Non-mapped function for tab toggles
 function TabToggle()
-	if &expandtab
-  	set shiftwidth=4
-  	set softtabstop=4
-		set noexpandtab
-	else
- 	  set shiftwidth=2
- 	  set softtabstop=2
-	  set expandtab
-	endif
+  if &expandtab
+    set shiftwidth=4
+    set softtabstop=4
+    set noexpandtab
+  else
+    set shiftwidth=2
+    set softtabstop=2
+    set expandtab
+  endif
 endfunc
 
 " Remappings
