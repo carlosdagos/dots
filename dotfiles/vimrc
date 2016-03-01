@@ -66,6 +66,19 @@ endfunc
 
 nnoremap <C-T> :call WhitespaceToggle()<cr>
 
+" Non-mapped function for tab toggles
+function TabToggle()
+	if &expandtab
+  	set shiftwidth=4
+  	set softtabstop=4
+		set noexpandtab
+	else
+ 	  set shiftwidth=2
+ 	  set softtabstop=2
+	  set expandtab
+	endif
+endfunc
+
 " Remappings
 "    Disable arrows 
 noremap <Up> <NOP>
@@ -83,6 +96,8 @@ let mapleader=','
 set backspace=2
 colorscheme dracula 
 syntax on
+" Check the function above, these
+" are my default values
 set tabstop=2
 set shiftwidth=2
 set expandtab
