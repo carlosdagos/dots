@@ -96,6 +96,7 @@ let mapleader=','
 set backspace=2
 colorscheme dracula 
 syntax on
+set laststatus=2
 " Check the function above, these
 " are my default values
 set tabstop=2
