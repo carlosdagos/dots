@@ -7,15 +7,11 @@ filetype off                  " required
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-" The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
 Plugin 'bling/vim-airline'
 Plugin 'mileszs/ack.vim'
@@ -38,10 +34,9 @@ Bundle 'gosukiwi/vim-atom-dark'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
 
 " Non-Plugin stuff after this line
+" ================================
 
 " Function for number toggle
 function! NumberToggle()
@@ -96,8 +91,13 @@ let mapleader=','
 set backspace=2
 colorscheme dracula 
 syntax on
+set shell=/bin/bash
 set laststatus=2
 set noshowmode
+
+" Draw a line at 80 columns
+set colorcolumn=80
+highlight ColorColumn ctermbg=235 guibg=#2c2d27
 
 " Check the function above, these
 " are my default values
