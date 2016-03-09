@@ -1,1 +1,3 @@
+:set -Wall
+:set -Werror
 :set prompt "\ESC[34m\STXλ> \ESC[m\STX"
