@@ -26,3 +26,8 @@ dotfiles/mutt/cache/bodies
 # Ignore tmux plugins
 #
 dotfiles/tmux/plugins
+
+#
+# Ignore tmux shell file
+#
+dotfiles/tmux/tmux.shell.conf

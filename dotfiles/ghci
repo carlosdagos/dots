@@ -1,1 +1,4 @@
+:set -Wall
+:set -Werror
+:set -fwarn-incomplete-uni-patterns
 :set prompt "\ESC[34m\STXλ> \ESC[m\STX"

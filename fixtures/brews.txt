@@ -86,3 +86,4 @@ wget
 xz
 zsh
 swig304 # Compatible version for m2crypto then later by pip
+fish # my new shell
