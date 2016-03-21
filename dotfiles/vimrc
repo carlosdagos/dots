@@ -25,6 +25,12 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'neovimhaskell/haskell-vim'
 Plugin 'derekwyatt/vim-scala'
+Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'guns/vim-sexp'
+Plugin 'guns/vim-clojure-static'
+Plugin 'tpope/vim-sexp-mappings-for-regular-people'
+Plugin 'tpope/vim-repeat.git'
+Plugin 'tpope/vim-surround.git'
 
 " old Vundle stuff
 Bundle 'wikitopian/hardmode'
@@ -75,7 +81,7 @@ function TabToggle()
 endfunc
 
 " Remappings
-"    Disable arrows 
+"    Disable arrows
 noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
@@ -89,7 +95,7 @@ set relativenumber
 set number
 let mapleader=','
 set backspace=2
-colorscheme dracula 
+colorscheme dracula
 syntax on
 set shell=/bin/bash
 set laststatus=2
