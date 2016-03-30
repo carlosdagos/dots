@@ -31,6 +31,7 @@ Plugin 'guns/vim-clojure-static'
 Plugin 'tpope/vim-sexp-mappings-for-regular-people'
 Plugin 'tpope/vim-repeat.git'
 Plugin 'tpope/vim-surround.git'
+Plugin 'junegunn/vim-easy-align'
 
 " old Vundle stuff
 Bundle 'wikitopian/hardmode'
@@ -81,6 +82,12 @@ function TabToggle()
 endfunc
 
 " Remappings
+" 	 Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+"    Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
 "    Disable arrows
 noremap <Up> <NOP>
 noremap <Down> <NOP>
