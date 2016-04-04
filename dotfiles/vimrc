@@ -68,6 +68,15 @@ endfunc
 
 nnoremap <C-T> :call WhitespaceToggle()<cr>
 
+function! TrimWhitespace()
+    let l:save_cursor = getpos('.')
+    %s/\s\+$//e
+    call setpos('.', l:save_cursor)
+endfun
+
+command TrimWhitespace call TrimWhitespace() " Trim whitespace with command
+autocmd BufWritePre * :call TrimWhitespace() " Trim whitespace on every save
+
 " Non-mapped function for tab toggles
 function TabToggle()
   if &expandtab
