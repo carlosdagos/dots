@@ -80,12 +80,8 @@ autocmd BufWritePre * :call TrimWhitespace() " Trim whitespace on every save
 " Non-mapped function for tab toggles
 function TabToggle()
   if &expandtab
-    set shiftwidth=4
-    set softtabstop=4
     set noexpandtab
   else
-    set shiftwidth=4
-    set softtabstop=4
     set expandtab
   endif
 endfunc
