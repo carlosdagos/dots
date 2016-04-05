@@ -22,7 +22,7 @@ Plugin 'benmills/vimux'
 Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
 Plugin 'rodjek/vim-puppet'
 Plugin 'kchmck/vim-coffee-script'
-"Plugin 'airblade/vim-gitgutter'
+Plugin 'airblade/vim-gitgutter'
 Plugin 'neovimhaskell/haskell-vim'
 Plugin 'derekwyatt/vim-scala'
 Plugin 'kien/rainbow_parentheses.vim'
