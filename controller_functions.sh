@@ -56,7 +56,7 @@ function install_brew_programs {
 #
 function install_brew_cask {
   $SMM_INSTALL_HOMEBREW_CASK
-  return 0 
+  return 0
 }
 
 #
@@ -105,7 +105,7 @@ function post_install_commands {
     # Install Vundle
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
   fi
-  
+
   # TPM not installed
   if [[ ! -d ~/.tmux/plugins/tpm ]]; then
     log_info "Installing tmux tpm"
@@ -120,7 +120,7 @@ function post_install_commands {
 
   # Check if my favorite theme is installed
   if [[ ! -d ~/.vim/bundle/dracula-theme ]]; then
-    vim +PluginInstall +qall 
+    vim +PluginInstall +qall
     # I'm lazy and assuming that last thing worked but
     # we're not done, we must now patch that sumbitch
     local patchsrc=$PWD/dotfiles/vim/dracula-theme.diff
@@ -157,6 +157,7 @@ function setup_dotfiles {
   soft_link "dotfiles/oh-my-zsh/myusuf3.zsh-theme" "$HOME/.oh-my-zsh/themes/myusuf3.zsh-theme"
   soft_link "dotfiles/tmux"                        "$HOME/.tmux"
   soft_link "dotfiles/tmux/tmux.conf"              "$HOME/.tmux.conf"
+  soft_link "dotfiles/fish/config.fish"            "$HOME/.config/fish/config.fish"
 
   return 0
 }
