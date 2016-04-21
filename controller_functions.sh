@@ -149,6 +149,7 @@ function setup_dotfiles {
 
   soft_link "dotfiles/ghci"                        "$HOME/.ghci"
   soft_link "dotfiles/vimrc"                       "$HOME/.vimrc"
+  soft_link "dotfiles/emacs"                       "$HOME/.emacs"
   soft_link "dotfiles/muttrc"                      "$HOME/.muttrc"
   soft_link "dotfiles/mutt"                        "$HOME/.mutt"
   soft_link "dotfiles/msmtprc"                     "$HOME/.msmtprc"
