@@ -30,6 +30,7 @@ Plugin 'guns/vim-clojure-static'
 Plugin 'tpope/vim-repeat.git'
 Plugin 'tpope/vim-surround.git'
 Plugin 'junegunn/vim-easy-align'
+Plugin 'scrooloose/syntastic'
 
 " old Vundle stuff
 Bundle 'wikitopian/hardmode'
@@ -42,6 +43,12 @@ filetype plugin indent on    " required
 
 " Non-Plugin stuff after this line
 " ================================
+
+" Enable syntastic only on certain types
+let g:syntastic_mode_map = {
+    \ "mode": "passive",
+    \ "active_filetypes": ["ruby", "python", "haskell"],
+    \ "passive_filetypes": [] }
 
 " Function for number toggle
 function! NumberToggle()
