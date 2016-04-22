@@ -8,6 +8,6 @@ TODO
 - Set up iTerm font programatically
 - Set up iTerm programatically to start with `~/.tmux/start.sh`
 - Set OS X dark "theme" programatically
-- Consider switching to `fish` shell
+- ~~Consider switching to `fish` shell~~
 - ~~Make room for tmux plugins~~
-- Consider switching to Prezto
+- ~~Consider switching to Prezto~~ `<- not gonna happen`
