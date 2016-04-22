@@ -3,4 +3,4 @@ set -g fisher_config ~/.config/fisherman
 source $fisher_home/config.fish
 
 alias emacs 'emacs -nw'
-
+alias bubu  'brew update; brew outdated; brew upgrade; brew cleanup'
