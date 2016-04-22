@@ -10,7 +10,7 @@
      ("melpa-stable" . "http://stable.melpa.org/packages/"))))
  '(package-selected-packages
    (quote
-    (flymake-haskell-multi neotree relative-line-numbers rainbow-delimiters quelpa haskell-mode git-gutter git-gutter+ evil-numbers evil))))
+    (flycheck flymake-haskell-multi neotree relative-line-numbers rainbow-delimiters quelpa haskell-mode git-gutter git-gutter+ evil-numbers evil))))
 
 (package-initialize)
 
@@ -37,6 +37,10 @@
 
 ;; Show line numbers
 (global-linum-mode t)
+
+;; Hide the menubar and toolbar
+(tool-bar-mode -1)
+(menu-bar-mode -1)
 
 ;; Custom set faces
 (custom-set-faces
