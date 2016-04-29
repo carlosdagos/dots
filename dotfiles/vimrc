@@ -47,8 +47,14 @@ filetype plugin indent on    " required
 " Enable syntastic only on certain types
 let g:syntastic_mode_map = {
     \ "mode": "passive",
-    \ "active_filetypes": ["ruby", "python", "haskell"],
+    \ "active_filetypes": ["ruby", "python", "haskell", "scala"],
     \ "passive_filetypes": [] }
+
+let g:syntastic_ignore_files = ['\m\c\.h$', '\m\.sbt$']
+
+" Scala has fsc and scalac checkers--running both is pretty redundant and
+" " slow. An explicit `:SyntasticCheck scalac` can always run the other.
+let g:syntastic_scala_checkers = ['fsc']
 
 " Function for number toggle
 function! NumberToggle()
@@ -79,11 +85,11 @@ function! TrimWhitespace()
     call setpos('.', l:save_cursor)
 endfun
 
-command TrimWhitespace call TrimWhitespace() " Trim whitespace with command
+command! TrimWhitespace call TrimWhitespace() " Trim whitespace with command
 autocmd BufWritePre * :call TrimWhitespace() " Trim whitespace on every save
 
 " Non-mapped function for tab toggles
-function TabToggle()
+function! TabToggle()
   if &expandtab
     set noexpandtab
   else
