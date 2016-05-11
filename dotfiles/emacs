@@ -10,7 +10,7 @@
      ("melpa-stable" . "http://stable.melpa.org/packages/"))))
  '(package-selected-packages
    (quote
-    (flycheck flymake-haskell-multi neotree relative-line-numbers rainbow-delimiters quelpa haskell-mode git-gutter git-gutter+ evil-numbers evil))))
+    (slime flycheck flymake-haskell-multi neotree relative-line-numbers rainbow-delimiters quelpa haskell-mode git-gutter git-gutter+ evil-numbers evil))))
 
 (package-initialize)
 
@@ -41,6 +41,12 @@
 ;; Hide the menubar and toolbar
 (tool-bar-mode -1)
 (menu-bar-mode -1)
+
+;; Inferior lisp program as sbcl
+(setq inferior-lisp-program (executable-find "sbcl"))
+
+;; Bells annoy me
+(setq visible-bell 1)
 
 ;; Custom set faces
 (custom-set-faces
