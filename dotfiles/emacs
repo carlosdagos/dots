@@ -18,6 +18,10 @@
 (require 'evil)
 (evil-mode 1)
 
+;; Require powerline
+(require 'powerline)
+(powerline-vim-theme)
+
 ;; Require neotree
 (require 'neotree)
 
@@ -39,7 +43,8 @@
 (global-linum-mode t)
 
 ;; Hide the menubar and toolbar
-(tool-bar-mode -1)
+(if window-system
+  (tool-bar-mode -1))
 (menu-bar-mode -1)
 
 ;; Inferior lisp program as sbcl
