@@ -63,10 +63,18 @@ function install_brew_cask {
 # Sets up my favorite casks
 #
 function install_brew_cask_programs {
-  log_info "Installing casks"
-  brew cask update
-  brew cask install $(read_list_file 'fixtures/brew_casks.txt')
-  return $?
+  log_warning "Do you want to install casks? [y/n]"
+  read casks
+
+  if [[ $casks == "y" || $casks == "yes" ]]; then
+      log_info "Installing casks"
+      brew cask update
+      brew cask install $(read_list_file 'fixtures/brew_casks.txt')
+      return $?
+  else
+      log_info "Casks skipped"
+      return 0
+  fi
 }
 
 #
