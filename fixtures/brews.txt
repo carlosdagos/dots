@@ -68,6 +68,7 @@ reattach-to-user-namespace
 samba
 sbt
 sbcl
+homebrew/emacs/slime
 # Maybe will fail without java installed
 scala
 sf-pwgen
