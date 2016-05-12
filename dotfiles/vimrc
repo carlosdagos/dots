@@ -52,6 +52,9 @@ let g:syntastic_mode_map = {
 
 let g:syntastic_ignore_files = ['\m\c\.h$', '\m\.sbt$']
 
+" Gitgutter show more signs
+let g:gitgutter_max_signs = 1500
+
 " Scala has fsc and scalac checkers--running both is pretty redundant and
 " " slow. An explicit `:SyntasticCheck scalac` can always run the other.
 let g:syntastic_scala_checkers = ['fsc']
