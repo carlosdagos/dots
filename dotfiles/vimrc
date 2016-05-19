@@ -31,6 +31,7 @@ Plugin 'tpope/vim-repeat.git'
 Plugin 'tpope/vim-surround.git'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'scrooloose/syntastic'
+Plugin 'altercation/vim-colors-solarized'
 
 " old Vundle stuff
 Bundle 'wikitopian/hardmode'
@@ -115,7 +116,7 @@ noremap <Right> <NOP>
 "    Nerdtree
 map <C-F> :NERDTreeToggle<CR>
 
-" Other options
+" Other (default) options
 set t_Co=256
 set relativenumber
 set number
