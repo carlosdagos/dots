@@ -101,21 +101,27 @@ function post_install_commands {
   fi
 
   # Check if oh-my-zsh is downloaded
-  if [[ ! -d ~/.oh-my-zsh ]]; then
+  if [[ ! -d $HOME/.oh-my-zsh ]]; then
     log_info "Installing oh-my-zsh"
     # Go to https://github.com/robbyrussell/oh-my-zsh
     sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
   fi
 
   # Check if Vundle is installed
-  if [[ ! -d ~/.vim/bundle/Vundle.vim ]]; then
+  if [[ ! -d $HOME/.vim/bundle/Vundle.vim ]]; then
     log_info "Installing Vundle"
     # Install Vundle
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
   fi
 
+  if [[ ! -d $HOME/.config/nvim ]]; then
+    log_info "Installing vim-plug"
+    mkdir -p $HOME/.config/nvim
+    curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  fi
+
   # TPM not installed
-  if [[ ! -d ~/.tmux/plugins/tpm ]]; then
+  if [[ ! -d $HOME/.tmux/plugins/tpm ]]; then
     log_info "Installing tmux tpm"
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
   fi
@@ -127,7 +133,7 @@ function post_install_commands {
   fi
 
   # Check if my favorite theme is installed
-  if [[ ! -d ~/.vim/bundle/dracula-theme ]]; then
+  if [[ ! -d $HOME/.vim/bundle/dracula-theme ]]; then
     vim +PluginInstall +qall
     # I'm lazy and assuming that last thing worked but
     # we're not done, we must now patch that sumbitch
@@ -157,6 +163,7 @@ function setup_dotfiles {
 
   soft_link "dotfiles/ghci"                        "$HOME/.ghci"
   soft_link "dotfiles/vimrc"                       "$HOME/.vimrc"
+  soft_link "dotfiles/nvimrc"                      "$HOME/.nvimrc"
   soft_link "dotfiles/emacs"                       "$HOME/.emacs"
   soft_link "dotfiles/muttrc"                      "$HOME/.muttrc"
   soft_link "dotfiles/mutt"                        "$HOME/.mutt"
