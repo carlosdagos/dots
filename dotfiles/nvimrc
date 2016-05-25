@@ -6,7 +6,6 @@ filetype off                  " required
 
 call plug#begin('~/.vim/plugged')
 
-" Keep Plug commands between vundle#begin/end.
 Plug 'tpope/vim-fugitive'
 Plug 'bling/vim-airline'
 Plug 'mileszs/ack.vim'
@@ -32,11 +31,22 @@ Plug 'wikitopian/hardmode'
 Plug 'w0ng/vim-hybrid'
 Plug 'gosukiwi/vim-atom-dark'
 
+function! DoRemote(arg)
+  UpdateRemotePlugins
+endfunction
+
+Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+Plug 'eagletmt/neco-ghc'
+
 " All of your Plugs must be added before the following line
 call plug#end()              " required
 
 " Non-Plug stuff after this line
 " ================================
+
+" Use deoplete
+let g:python3_host_prog = '/usr/local/bin/python3'
+let g:deoplete#enable_at_startup = 1
 
 " Neomake on save
 autocmd! BufWritePost * Neomake
