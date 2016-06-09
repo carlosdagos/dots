@@ -11,7 +11,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'easymotion/vim-easymotion'
 Plug 'benmills/vimux'
-Plug 'zenorocha/dracula-theme', {'rtp': 'vim/'}
+Plug 'dracula/vim'
 Plug 'rodjek/vim-puppet'
 Plug 'kchmck/vim-coffee-script'
 Plug 'airblade/vim-gitgutter'
