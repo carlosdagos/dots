@@ -1,7 +1,5 @@
 set directory=~/.vim/backup
 set backupdir=~/.vim/backup   " keep swap files here
-
-set nocompatible              " be iMproved, required
 filetype off                  " required
 
 call plug#begin('~/.vim/plugged')
@@ -53,14 +51,14 @@ autocmd! BufWritePost * Neomake
 
 " Nerdtree git plugin symbols
 let g:NERDTreeIndicatorMapCustom = {
-    \ "Modified"  : "*",
-    \ "Staged"    : "+",
-    \ "Untracked" : "-",
-    \ "Renamed"   : "~",
-    \ "Unmerged"  : "¬",
-    \ "Deleted"   : "×",
-    \ "Dirty"     : "¬",
-    \ "Clean"     : "✓",
+    \ "Modified"  : "ᵐ",
+    \ "Staged"    : "ˢ",
+    \ "Untracked" : "ᵘ",
+    \ "Renamed"   : "ʳ",
+    \ "Unmerged"  : "ᶴ",
+    \ "Deleted"   : "ˣ",
+    \ "Dirty"     : "˜",
+    \ "Clean"     : "ᵅ",
     \ "Unknown"   : "?"
     \ }
 
@@ -124,7 +122,6 @@ noremap <Right> <NOP>
 map <C-F> :NERDTreeToggle<CR>
 
 " Other options
-set t_Co=256
 set relativenumber
 set number
 let mapleader=','
