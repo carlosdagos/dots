@@ -28,6 +28,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'wikitopian/hardmode'
 Plug 'w0ng/vim-hybrid'
 Plug 'gosukiwi/vim-atom-dark'
+Plug 'Valloric/MatchTagAlways'
 
 function! DoRemote(arg)
   UpdateRemotePlugins
