@@ -4,3 +4,5 @@ source $fisher_home/config.fish
 
 alias emacs 'emacs -nw'
 alias bubu  'brew update; brew outdated; brew upgrade; brew cleanup'
+
+set PATH $PATH $HOME/.bin/
