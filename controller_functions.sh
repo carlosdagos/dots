@@ -173,6 +173,7 @@ function setup_dotfiles {
   soft_link "dotfiles/tmux"                        "$HOME/.tmux"
   soft_link "dotfiles/tmux/tmux.conf"              "$HOME/.tmux.conf"
   soft_link "dotfiles/fish/config.fish"            "$HOME/.config/fish/config.fish"
+  soft_link "dotfiles/bin/"                        "$HOME/.bin"
 
   return 0
 }
