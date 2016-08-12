@@ -29,6 +29,7 @@ Plug 'wikitopian/hardmode'
 Plug 'w0ng/vim-hybrid'
 Plug 'gosukiwi/vim-atom-dark'
 Plug 'Valloric/MatchTagAlways'
+Plug 'morhetz/gruvbox'
 
 function! DoRemote(arg)
   UpdateRemotePlugins
@@ -134,8 +135,9 @@ set laststatus=2
 set noshowmode
 
 " Draw a line at 80 columns
-set colorcolumn=80
-highlight ColorColumn ctermbg=235 guibg=#2c2d27
+" set colorcolumn=80
+execute "set colorcolumn=" . join(range(81,335), ',')
+highlight ColorColumn ctermbg=233 guibg=#0d0d0d
 
 " Check the function above, these
 " are my default values
