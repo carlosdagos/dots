@@ -172,9 +172,12 @@ function setup_dotfiles {
   soft_link "dotfiles/oh-my-zsh/myusuf3.zsh-theme" "$HOME/.oh-my-zsh/themes/myusuf3.zsh-theme"
   soft_link "dotfiles/tmux"                        "$HOME/.tmux"
   soft_link "dotfiles/tmux/tmux.conf"              "$HOME/.tmux.conf"
-  soft_link "dotfiles/fish/config.fish"            "$HOME/.config/fish/config.fish"
   soft_link "dotfiles/bin"                         "$HOME/.bin"
   soft_link "dotfiles/kwmrc"                       "$HOME/.kwm/kwmrc"
+  soft_link "dotfiles/fish/config.fish"            "$HOME/.config/fish/config.fish"
+  soft_link "dotfiles/fish/functions"              "$HOME/.config/fish/functions"
+  soft_link "dotfiles/fish/completions"            "$HOME/.config/fish/completions"
+
 
   return 0
 }

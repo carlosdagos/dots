@@ -18,3 +18,11 @@ end
 if test -d $HOME/.bin
     set PATH $PATH $HOME/.bin
 end
+
+if test -d $HOME/Desktop/workspace/golang
+    set PATH $PATH $HOME/Desktop/workspace/golang
+end
+
+
+set -gx PATH $PATH (find ~/.gvm/*/current/bin -maxdepth 0)
+
