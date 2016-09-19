@@ -18,3 +18,7 @@ end
 if test -d $HOME/.bin
     set PATH $PATH $HOME/.bin
 end
+
+if test -d $HOME/.gvm
+   gvm use go1.7 --default > /dev/null
+end
