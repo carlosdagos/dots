@@ -215,13 +215,13 @@
 		<key>Alpha Component</key>
 		<real>1</real>
 		<key>Blue Component</key>
-		<real>0.046200096607208252</real>
+		<real>0.0</real>
 		<key>Color Space</key>
 		<string>Calibrated</string>
 		<key>Green Component</key>
-		<real>0.046200096607208252</real>
+		<real>0.0</real>
 		<key>Red Component</key>
-		<real>0.046200096607208252</real>
+		<real>0.0</real>
 	</dict>
 	<key>Badge Color</key>
 	<dict>
@@ -267,13 +267,13 @@
 		<key>Alpha Component</key>
 		<real>0.25</real>
 		<key>Blue Component</key>
-		<real>1</real>
+		<real>0.17107169330120087</real>
 		<key>Color Space</key>
 		<string>Calibrated</string>
 		<key>Green Component</key>
-		<real>0.9100000262260437</real>
+		<real>0.16976068913936615</real>
 		<key>Red Component</key>
-		<real>0.64999997615814209</real>
+		<real>0.16568823158740997</real>
 	</dict>
 	<key>Cursor Text Color</key>
 	<dict>
