@@ -4,6 +4,7 @@ source $fisher_home/config.fish
 
 alias emacs 'emacs -nw'
 alias bubu  'brew update; brew outdated; brew upgrade; brew cleanup'
+alias 1pass '1pass --path $HOME/Dropbox/1Password/1Password.agilekeychain'
 
 set PATH $PATH /usr/local/sbin
 
