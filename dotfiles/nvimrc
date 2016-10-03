@@ -32,6 +32,7 @@ Plug 'Valloric/MatchTagAlways'
 Plug 'morhetz/gruvbox'
 Plug 'ElmCast/elm-vim'
 Plug 'morhetz/gruvbox'
+Plug 'raichoo/purescript-vim'
 
 function! DoRemote(arg)
   UpdateRemotePlugins
