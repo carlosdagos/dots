@@ -11,7 +11,12 @@ render: (output) ->
   """
 
 update: (output, el) ->
-    $(".foc span:first-child", el).text("  #{output}")
+    focused = if output.length <= 80
+                output
+              else
+                "#{output.substring(0,79)}..."
+
+    $(".foc span:first-child", el).text("  #{focused}")
     $icon = $(".foc span.icon", el)
     $icon.removeClass().addClass("icon")
     $icon.addClass("fa fa-bars")
