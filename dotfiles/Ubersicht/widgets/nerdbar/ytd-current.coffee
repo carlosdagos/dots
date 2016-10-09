@@ -41,7 +41,16 @@ render: (output) ->
 
 update: (output, el) ->
     [state, artist, album, track, pos] = output.split("\n")
-    $(".np span.data", el).text("  #{artist} - #{album} - #{track} - (#{pos})")
+    album = if album.length < 20
+                album
+            else
+                "#{album.substring(0,19)}..."
+    track = if track.length < 30
+                track
+            else
+                "#{track.substring(0,29)}..."
+
+    $(".np span.data", el).text("  #{artist} | #{album} | #{track} (#{pos})")
     $icon = $(".np span.icon", el)
     $icon.removeClass().addClass("icon")
     $icon.addClass("fa #{@icon(state)}")

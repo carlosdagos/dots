@@ -94,6 +94,8 @@ kwmc rule owner="iTerm2" properties={role="AXDialog"}
    kwmc rule owner="Photoshop" properties={float="true"} */
 
 kwmc rule owner="Digital Color Meter" properties={float="true"}
+kwmc rule owner="1Password 4" properties={float="true"}
+kwmc rule owner="Airmail" properties={float="true"}
 
 /* The following command creates a rule that
    captures an application to the given screen,
