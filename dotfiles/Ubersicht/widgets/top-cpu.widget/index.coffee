@@ -22,7 +22,8 @@ style: """
 
   td
     border: 0px solid #fff
-    font-size: 26px
+    font-size: 20px
+    font-smoothing: antialiased
     font-weight: 100
     width: 120px
     max-width: 120px

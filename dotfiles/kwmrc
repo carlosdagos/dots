@@ -49,7 +49,7 @@ kwmc config float-non-resizable on
 kwmc config lock-to-container on
 
 // Set focus-follows-mouse-mode to autoraise
-kwmc config focus-follows-mouse on
+kwmc config focus-follows-mouse off
 
 /* Focus-follows-mouse is temporarily disabled when
    a floating window has focus */
@@ -93,6 +93,8 @@ kwmc rule owner="iTerm2" properties={role="AXDialog"}
    kwmc rule owner="Steam" properties={float="true"}
    kwmc rule owner="Photoshop" properties={float="true"} */
 
+kwmc rule owner="Digital Color Meter" properties={float="true"}
+
 /* The following command creates a rule that
    captures an application to the given screen,
    if the screen exists.
@@ -101,8 +103,8 @@ kwmc rule owner="iTerm2" properties={role="AXDialog"}
 
 // Enable border for focused window
 kwmc config border focused on
-kwmc config border focused size 2
-kwmc config border focused color 0xFFBDD322
+kwmc config border focused size 1
+kwmc config border focused color 0xFFCC5577
 kwmc config border focused radius 3
 
 // Enable border for marked window

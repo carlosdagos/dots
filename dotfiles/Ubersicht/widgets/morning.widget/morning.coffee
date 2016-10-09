@@ -11,7 +11,7 @@ style: """
   margin-top: 57%
   width: 100%
   color: #fff
-  font-family: "Consolas", Helvetica, Arial
+  font-family: Consolas, Helvetica, Arial
 
   .container
    font-weight: lighter
