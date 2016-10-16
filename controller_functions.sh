@@ -14,7 +14,13 @@ function setup_directories {
   # First make this program's directory
   mkdir -p $SMM_DIR
   # Then make all the rest of the stuff
-  mkdir -p $(read_list_file 'fixtures/directories.txt')
+  for dir in $(read_list_file 'fixtures/directories.txt')
+  do
+    directory="${dir/HOME/$HOME}"
+    log_info "Setup directory: $directory"
+    mkdir -p $directory
+done
+
   return 0
 }
 
