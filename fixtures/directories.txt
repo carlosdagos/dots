@@ -1,6 +1,8 @@
 # I use this to keep my code and stuff
-~/Desktop/workspace
-# Just in case they're not there :S
-~/.vim
-~/.vim/backup
-~/.tmux
+HOME/Desktop/workspace
+# Just in case they're not there
+HOME/.vim
+HOME/.vim/backup
+HOME/.tmux
+
+# NOTE: The 'HOME' gets replaced by whatever the $HOME folder is
