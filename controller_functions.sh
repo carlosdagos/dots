@@ -19,7 +19,7 @@ function setup_directories {
     directory="${dir/HOME/$HOME}"
     log_info "Setup directory: $directory"
     mkdir -p $directory
-done
+  done
 
   return 0
 }
