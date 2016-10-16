@@ -25,12 +25,12 @@ set smtp_url = "smtp://carlos.dagostino@smtp.gmail.com:587/"
 set smtp_pass = "$my_pass"
 
 # Local folders for caching
+unset ssl_usesystemcerts
 set header_cache =~/.mutt/cache/headers
-set message_cachedir =~/.mutt/cache/bodies
 set certificate_file =~/.mutt/certificates
 
 # Set editor to create new email
-set editor='vim'
+set editor="nvim +13 -c 'set nobackup' -c 'set noswapfile' -c 'set nowritebackup' -c 'set tw=72 ft=mail noautoindent'"
 
 # main options
 set realname     = "Carlos D."
@@ -38,11 +38,27 @@ set mail_check   = 0
 set envelope_from
 set send_charset = "utf-8"
 
+# view html automatically
+auto_view text/html
+# save html for last
+alternative_order text/plain text/enriched text/html
+
 unset move
 set delete
 unset confirmappend
 set quit
 unset mark_old
+
+# SSL hardening
+set ssl_force_tls=yes
+set ssl_starttls=yes
+set ssl_use_sslv2=no
+set ssl_use_sslv3=no
+set ssl_use_tlsv1=no
+set ssl_use_tlsv1_1=no
+set ssl_use_tlsv1_2=yes
+set ssl_verify_dates=yes
+set ssl_verify_host=yes
 
 # sort/threading
 set sort     = threads
