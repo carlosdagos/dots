@@ -1,11 +1,9 @@
-set -g fisher_home ~/.local/share/fisherman
-set -g fisher_config ~/.config/fisherman
-source $fisher_home/config.fish
-
+# My aliases
 alias emacs 'emacs -nw'
 alias bubu  'brew update ;and brew outdated ;and brew upgrade ;and brew cleanup'
 alias 1pass '1pass --path $HOME/Dropbox/1Password/1Password.agilekeychain'
 
+# Set the $PATH accordingly
 set PATH $PATH /usr/local/sbin
 
 if test -d $HOME/Library/Haskell/bin
@@ -20,6 +18,7 @@ if test -d $HOME/.bin
     set PATH $PATH $HOME/.bin
 end
 
+# Hack for GVM to write some Go
 if test -d $HOME/.gvm
    set go_version "go1.7"
    set GVM_ROOT "$HOME/.gvm"
