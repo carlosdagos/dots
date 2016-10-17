@@ -31,3 +31,19 @@ dotfiles/tmux/plugins
 # Ignore tmux shell file
 #
 dotfiles/tmux/tmux.shell.conf
+
+#
+# Ignore fisher files
+#
+dotfiles/fish/completions/fisher.fish
+dotfiles/fish/functions/__format_time.fish
+dotfiles/fish/functions/__parse_current_folder.fish
+dotfiles/fish/functions/__parse_git_branch.fish
+dotfiles/fish/functions/debug.fish
+dotfiles/fish/functions/fish_greeting.fish
+dotfiles/fish/functions/fish_prompt.fish
+dotfiles/fish/functions/fish_right_prompt.fish
+dotfiles/fish/functions/fish_title.fish
+dotfiles/fish/functions/fisher.fish
+dotfiles/fish/functions/installer.fish
+dotfiles/fish/functions/spin.fish
