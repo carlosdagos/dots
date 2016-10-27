@@ -96,6 +96,8 @@ kwmc rule owner="iTerm2" properties={role="AXDialog"}
 kwmc rule owner="Digital Color Meter" properties={float="true"}
 kwmc rule owner="1Password 4" properties={float="true"}
 kwmc rule owner="Airmail" properties={float="true"}
+kwmc rule owner="Skype" properties={float="true"}
+kwmc rule owner="Messages" properties={float="true"}
 
 /* The following command creates a rule that
    captures an application to the given screen,
@@ -107,7 +109,7 @@ kwmc rule owner="Airmail" properties={float="true"}
 kwmc config border focused on
 kwmc config border focused size 1
 kwmc config border focused color 0xFFCC5577
-kwmc config border focused radius 3
+kwmc config border focused radius 0
 
 // Enable border for marked window
 kwmc config border marked on
