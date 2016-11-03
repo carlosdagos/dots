@@ -100,17 +100,29 @@ function post_install_commands {
   log_info "Running post-install commands"
 
   # Set up zsh as shell for my user
-  if [[ $SHELL != "/bin/zsh" ]]; then
-    log_info "Setting ZSH as main shell"
-    chsh -s /bin/zsh
-    sudo chsh -s /bin/zsh
-  fi
+  if [[ $SHELL != "/bin/zsh" && $SHELL != "/usr/local/bin/fish" ]]; then
+    # TODO: Test this better
+    log_warning "Which shell would you like to use? [F]ish/[Z]sh?"
+    read shellchoice
 
-  # Check if oh-my-zsh is downloaded
-  if [[ ! -d $HOME/.oh-my-zsh ]]; then
-    log_info "Installing oh-my-zsh"
-    # Go to https://github.com/robbyrussell/oh-my-zsh
-    sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+    if [[ shellchoice == F* || shellchoice == f* ]]; then
+        log_info "Setting FISH as main shell"
+        chsh -s /usr/local/bin/fish
+        sudo chsh -s /usr/local/bin/fish
+    elif [[ shellchoice == Z* || shellchoice == z* ]]; then
+        log_info "Setting ZSH as main shell"
+        chsh -s /bin/zsh
+        sudo chsh -s /bin/zsh
+
+        # Check if oh-my-zsh is downloaded
+        if [[ ! -d $HOME/.oh-my-zsh ]]; then
+            log_info "Installing oh-my-zsh"
+            # Go to https://github.com/robbyrussell/oh-my-zsh
+            sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+        fi
+    else
+        exit
+    fi
   fi
 
   # Check if Vundle is installed
@@ -118,12 +130,14 @@ function post_install_commands {
     log_info "Installing Vundle"
     # Install Vundle
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+    vim +PluginClean +PluginInstall +qall
   fi
 
   if [[ ! -d $HOME/.config/nvim ]]; then
     log_info "Installing vim-plug"
     mkdir -p $HOME/.config/nvim
     curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    nvim +PlugClean +PlugInstall +qall
   fi
 
   # TPM not installed
