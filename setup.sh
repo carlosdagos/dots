@@ -1,5 +1,9 @@
 #!/bin/bash
 
+set -o errexit
+set -o pipefail
+set -o nounset
+
 #
 # Main entry point for my setup
 #
@@ -7,7 +11,7 @@
 source controller_functions.sh
 
 #
-# Main function 
+# Main function
 #
 function main {
   # Ordered steps to take to set up my mac
