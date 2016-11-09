@@ -33,6 +33,7 @@ Plug 'morhetz/gruvbox'
 Plug 'ElmCast/elm-vim'
 Plug 'morhetz/gruvbox'
 Plug 'raichoo/purescript-vim'
+Plug 'LnL7/vim-nix'
 
 function! DoRemote(arg)
   UpdateRemotePlugins
