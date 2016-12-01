@@ -2,7 +2,6 @@
 alias emacs 'emacs -nw'
 alias bubu  'brew update ;and brew outdated ;and brew upgrade ;and brew cleanup'
 alias 1pass '1pass --path $HOME/Dropbox/1Password/1Password.agilekeychain'
-alias btc   'http https://bitpay.com/api/rates | jq ".[2].rate"'
 
 # Set the $PATH accordingly
 set PATH $PATH /usr/local/sbin
