@@ -41,6 +41,7 @@ endfunction
 
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'eagletmt/neco-ghc'
+Plug 'fishbullet/deoplete-ruby'
 
 " All of your Plugs must be added before the following line
 call plug#end()              " required
