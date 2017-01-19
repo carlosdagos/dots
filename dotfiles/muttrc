@@ -4,30 +4,33 @@
 #
 source ~/.mutt/colors
 source ~/.mutt/accounts/personal
+source ~/.mutt/gpg.rc
 
 set my_pass = "`1pass --path ~/Dropbox/1Password/1Password.agilekeychain GoogleMutt`"
 
-set from = "carlos.dagostino@gmail.com"
-set realname = "Carlos D."
+set from      = "carlos.dagostino@gmail.com"
+set realname  = "Carlos D."
 set imap_user = "carlos.dagostino@gmail.com"
 set imap_pass = "$my_pass"
 
 # Remote Gmail Folders
 set folder    = "imaps://imap.gmail.com:993"
 set spoolfile = "+INBOX"
-set record    = "+[Gmail].Sent Mail"
 set postponed = "+[Gmail].Drafts"
 set trash     = "+[Gmail]/Trash"
+set signature = "~/.mutt/signature"
 set smtp_authenticators = 'gssapi:login'
+set norecord
 
 # SMTP Settings to send email
-set smtp_url = "smtp://carlos.dagostino@smtp.gmail.com:587/"
+set smtp_url  = "smtp://carlos.dagostino@smtp.gmail.com:587/"
 set smtp_pass = "$my_pass"
 
 # Local folders for caching
 unset ssl_usesystemcerts
 set header_cache =~/.mutt/cache/headers
 set certificate_file =~/.mutt/certificates
+set alias_file=~/.mutt/aliases
 
 # Set editor to create new email
 set editor="nvim +13 -c 'set nobackup' -c 'set noswapfile' -c 'set nowritebackup' -c 'set tw=72 ft=mail noautoindent'"
@@ -48,6 +51,10 @@ set delete
 unset confirmappend
 set quit
 unset mark_old
+set hostname=carlosdagos
+set hidden_host
+set noallow_8bit
+set edit_headers
 
 # SSL hardening
 set ssl_force_tls=yes
@@ -59,6 +66,11 @@ set ssl_use_tlsv1_1=no
 set ssl_use_tlsv1_2=yes
 set ssl_verify_dates=yes
 set ssl_verify_host=yes
+
+# PGP options
+set pgp_sign_as=0xC6D2BCB4
+set pgp_replyencrypt=yes
+set pgp_timeout=1800
 
 # sort/threading
 set sort     = threads
@@ -93,3 +105,7 @@ hdr_order from: to: cc: date: subject: # and in this order
 # Contacts
 set query_command = "goobook query %s"
 bind editor <Tab> complete-query
+
+# Last, but not least, get mutt to display its version on startup.
+push <show-version>
+message-hook '!(~g|~G) ~b"^-----BEGIN\ PGP\ (SIGNED\ )?MESSAGE"' "exec check-traditional-pgp"
