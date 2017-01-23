@@ -42,6 +42,7 @@ set envelope_from
 set send_charset = "utf-8"
 
 # view html automatically
+set mailcap_path = "~/.mutt/mailcap"
 auto_view text/html
 # save html for last
 alternative_order text/plain text/enriched text/html
@@ -86,10 +87,11 @@ set smart_wrap
 set tilde
 unset markers
 
-# my own bidndings
+# my own bindings
 bind index "G" imap-fetch-mail      # I don't need the default binding
-bind index ")" next-page            # go to next and prev page with parens
+bind index ")" next-page            # Go to next and prev page with parens
 bind index "(" previous-page
+bind attach <return> view-mailcap   # Convenience for html email
 
 # composing
 set fcc_attach
