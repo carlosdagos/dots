@@ -2,6 +2,7 @@
 alias emacs 'emacs -nw'
 alias bubu  'brew update ;and brew outdated ;and brew upgrade ;and brew cleanup'
 alias 1pass '1pass --path $HOME/Dropbox/1Password/1Password.agilekeychain'
+alias l     'ls -la'
 
 # Set the $PATH accordingly
 set PATH $PATH /usr/local/sbin

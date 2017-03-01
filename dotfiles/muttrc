@@ -2,7 +2,7 @@
 # Don't need any downloading of email,
 # maybe later
 #
-source ~/.mutt/colors-vombatidae
+source ~/.mutt/colors-solarized
 source ~/.mutt/accounts/personal
 source ~/.mutt/gpg.rc
 
