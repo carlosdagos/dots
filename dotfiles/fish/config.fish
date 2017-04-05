@@ -5,7 +5,9 @@ alias 1pass '1pass --path $HOME/Dropbox/1Password/1Password.agilekeychain'
 alias l     'ls -la'
 
 # Set the $PATH accordingly
-set PATH $PATH /usr/local/sbin
+if test -d /usr/local/sbin
+    set PATH $PATH /usr/local/sbin
+end
 
 if test -d $HOME/Library/Haskell/bin
     set PATH $PATH $HOME/Library/Haskell/bin
