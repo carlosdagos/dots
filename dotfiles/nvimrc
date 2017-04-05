@@ -135,9 +135,15 @@ let mapleader=','
 set backspace=2
 colorscheme dracula
 syntax on
-set shell=/bin/bash
 set laststatus=2
 set noshowmode
+
+let s:uname = system("uname -a")
+if s:uname =~ "NixOS"
+    set shell=/run/current-system/sw/bin/bash
+else
+    set shell=/bin/bash
+endif
 
 " Draw a line at 80 columns
 execute "set colorcolumn=" . join(range(81,335), ',')
