@@ -21,6 +21,7 @@ smm.log
 # and cache
 #
 dotfiles/mutt/cache/headers
+dotfiles/mutt/cache/headers-lock
 dotfiles/mutt/certificates
 dotfiles/mutt/cache/bodies
 
