@@ -114,6 +114,8 @@ function! TabToggle()
 endfunc
 
 " Remappings
+"    I hate the ESC key
+imap jk <Esc>
 " 	 Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 
