@@ -1,5 +1,5 @@
 # My aliases
-alias emacs 'emacs -nw'
+alias emacs 'env SHELL=/bin/bash emacs'
 alias bubu  'brew update ;and brew outdated ;and brew upgrade ;and brew cleanup'
 alias 1pass '1pass --path $HOME/Dropbox/1Password/1Password.agilekeychain'
 alias l     'ls -la'
@@ -19,6 +19,14 @@ end
 
 if test -d $HOME/.bin
     set PATH $PATH $HOME/.bin
+end
+
+set -gx LC_ALL en_US.UTF-8
+set -gx LANG   en_US.UTF-8
+
+# Emacs in windowed mode is now necessary
+function emacs-windowed --description "Opens emacs in windowed mode"
+    env SHELL=/bin/bash /Applications/Emacs.app/Contents/MacOS/Emacs &
 end
 
 # Hack for GVM to write some Go
