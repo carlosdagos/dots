@@ -1,8 +1,11 @@
 # My aliases
-alias emacs 'env SHELL=/bin/bash emacs'
 alias bubu  'brew update ;and brew outdated ;and brew upgrade ;and brew cleanup'
 alias 1pass '1pass --path $HOME/Dropbox/1Password/1Password.agilekeychain'
 alias l     'ls -la'
+alias btc   'http https://api.cryptowat.ch/markets/kraken/btceur/summary | jq -r \'.result | ["current", .price.last|tostring] | join(": ")\''
+
+
+alias emacs-is-stuck 'pkill -SIGUSR2 emacs'
 
 # Set the $PATH accordingly
 if test -d /usr/local/sbin
@@ -17,17 +20,16 @@ if test -d $HOME/.local/bin
     set PATH $PATH $HOME/.local/bin
 end
 
+if test -d $HOME/nodejs-bin/bin
+    set PATH $PATH $HOME/nodejs-bin/bin
+end
+
 if test -d $HOME/.bin
     set PATH $PATH $HOME/.bin
 end
 
 set -gx LC_ALL en_US.UTF-8
 set -gx LANG   en_US.UTF-8
-
-# Emacs in windowed mode is now necessary
-function emacs-windowed --description "Opens emacs in windowed mode"
-    env SHELL=/bin/bash /Applications/Emacs.app/Contents/MacOS/Emacs &
-end
 
 # Hack for GVM to write some Go
 if test -d $HOME/.gvm

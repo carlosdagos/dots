@@ -10,7 +10,9 @@
      ("melpa-stable" . "http://stable.melpa.org/packages/"))))
  '(package-selected-packages
    (quote
-    (slime flycheck flymake-haskell-multi neotree relative-line-numbers rainbow-delimiters quelpa haskell-mode git-gutter git-gutter+ evil-numbers evil))))
+    (slime flycheck rainbow-delimiters quelpa git-gutter git-gutter+ evil-numbers evil))))
+
+(add-to-list 'load-path "~/.emacs.d/evil")
 
 (package-initialize)
 
@@ -21,9 +23,6 @@
 ;; Require powerline
 (require 'powerline)
 (powerline-vim-theme)
-
-;; Require neotree
-(require 'neotree)
 
 ;; Start rainbow delimiters
 (require 'rainbow-delimiters)
@@ -47,11 +46,23 @@
   (tool-bar-mode -1))
 (menu-bar-mode -1)
 
-;; Inferior lisp program as sbcl
-(setq inferior-lisp-program (executable-find "sbcl"))
+;; Inferior lisp program as alisp
+(setq inferior-lisp-program (executable-find "alisp"))
 
 ;; Bells annoy me
 (setq visible-bell 1)
+
+;; Smooth scrolling is better
+(require 'sublimity)
+(require 'sublimity-scroll)
+(sublimity-mode 1)
+(setq scroll-conservatively 10000)
+(setq scroll-margin 1
+      scroll-conservatively 0
+      scroll-up-aggressively 0.01
+      scroll-down-aggressively 0.01)
+(setq-default scroll-up-aggressively 0.01
+              scroll-down-aggressively 0.01)
 
 ;; Custom set faces
 (custom-set-faces
