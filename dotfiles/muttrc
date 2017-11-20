@@ -2,29 +2,29 @@
 # Don't need any downloading of email,
 # maybe later
 #
-source ~/.mutt/colors-solarized
-source ~/.mutt/accounts/personal
+source ~/.mutt/gruvbox-256
 source ~/.mutt/gpg.rc
 
-set my_pass = "`1pass --path ~/Dropbox/1Password/1Password.agilekeychain GoogleMutt`"
+# Folder hooks
+folder-hook 'personal' 'source ~/.mutt/accounts/personal'
+folder-hook 'work' 'source ~/.mutt/accounts/work'
+folder-hook . "push <collapse-all>\n"
 
-set from      = "carlos.dagostino@gmail.com"
-set realname  = "Carlos D."
-set imap_user = "carlos.dagostino@gmail.com"
-set imap_pass = "$my_pass"
+# Default account
+source ~/.mutt/accounts/personal
+
+# Macros for switching accounts
+macro index <f2> '<sync-mailbox><enter-command>source ~/.mutt/accounts/personal<enter><change-folder>!<enter>'
+macro index <f3> '<sync-mailbox><enter-command>source ~/.mutt/accounts/work<enter><change-folder>!<enter>'
+
+source ~/.mutt/accounts/personal
 
 # Remote Gmail Folders
-set folder    = "imaps://imap.gmail.com:993"
 set spoolfile = "+INBOX"
 set postponed = "+[Gmail].Drafts"
 set trash     = "+[Gmail]/Trash"
-set signature = "~/.mutt/signature"
 set smtp_authenticators = 'gssapi:login'
 set norecord
-
-# SMTP Settings to send email
-set smtp_url  = "smtp://carlos.dagostino@smtp.gmail.com:587/"
-set smtp_pass = "$my_pass"
 
 # Local folders for caching
 unset ssl_usesystemcerts
@@ -40,6 +40,7 @@ set realname     = "Carlos D."
 set mail_check   = 0
 set envelope_from
 set send_charset = "utf-8"
+set quit=ask-no
 
 # view html automatically
 set mailcap_path = "~/.mutt/mailcap"
@@ -74,9 +75,14 @@ set pgp_replyencrypt=yes
 set pgp_timeout=1800
 
 # sort/threading
-set sort     = threads
-set sort_aux = reverse-last-date-received
+set sort           = reverse-last-date-received
+set strict_threads = yes
+set sort_browser   = reverse-date
+#set sort_aux       = reverse-last-date-received
 set sort_re
+unset collapse_unread
+bind index - collapse-thread
+bind index _ collapse-all
 
 # look and feel
 set pager_index_lines = 8

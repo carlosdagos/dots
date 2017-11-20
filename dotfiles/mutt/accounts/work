@@ -1,0 +1,18 @@
+# I'm a moron who can't spell `Google` :D
+set my_pass = "`pass GooglMuttWork`"
+
+# Account details
+set from      = "cdagostino@ravenpack.com"
+set realname  = "Carlos D'Agostino"
+set imap_user = "cdagostino@ravenpack.com"
+set imap_pass = "$my_pass"
+
+# SMTP Settings to send email
+set smtp_url  = "smtp://cdagostino@ravenpack.com@smtp.gmail.com:587/"
+set smtp_pass = "$my_pass"
+
+# Folder
+set folder    = "imaps://imap.gmail.com:993"
+
+# Signature
+set signature = "~/.mutt/work_signature"
