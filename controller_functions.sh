@@ -197,7 +197,9 @@ function setup_dotfiles {
   soft_link "dotfiles/fish/config.fish"            "$HOME/.config/fish/config.fish"
   soft_link "dotfiles/fish/functions"              "$HOME/.config/fish/functions"
   soft_link "dotfiles/fish/completions"            "$HOME/.config/fish/completions"
-
+  soft_link "dotfiles/dunstrc"                     "$HOME/.dunstrc"
+  soft_link "dotfiles/Xdefaults"                   "$HOME/.Xdefaults"
+  soft_link "dotfiles/i3/config"                   "$HOME/.config/i3/config"
 
   return 0
 }
