@@ -10,6 +10,12 @@
 
 (package-initialize)
 
+;; Please use bash for the shell (fish shell works clunky)
+(setq explicit-shell-file-name "/run/current-system/sw/bin/bash")
+
+;; Don't use tabs!
+(setq-default indent-tabs-mode nil)
+
 ;; Hide the scroolbar, menubar and toolbar
 (scroll-bar-mode -1)
 (if window-system
@@ -27,6 +33,38 @@
 (set-face-attribute  'show-paren-match nil :weight 'extra-bold)
 (require 'rainbow-delimiters)
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+
+;; Set up an 80 column rule
+(require 'whitespace)
+(setq whitespace-line-column 80) ;; limit line length
+(setq whitespace-style '(face lines-tail))
+(global-whitespace-mode +1)
+
+;; Enable the git gutter
+(global-git-gutter+-mode)
+(setq git-gutter+-window-width  2)
+(setq git-gutter+-modified-sign "~ ")
+(setq git-gutter+-added-sign    "+ ")
+(setq git-gutter+-deleted-sign  "- ")
+
+;; Set up parinfer
+(use-package parinfer
+  :ensure t
+  :bind
+  (("C-," . parinfer-toggle-mode))
+  :init
+  (progn
+    (setq parinfer-extensions
+          '(defaults       ; should be included.
+            pretty-parens  ; different paren styles for different modes.
+            evil           ; If you use Evil.
+            paredit        ; Introduce some paredit commands.
+            smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
+            smart-yank))   ; Yank behavior depend on mode.
+    (add-hook 'emacs-lisp-mode-hook #'parinfer-mode)
+    (add-hook 'common-lisp-mode-hook #'parinfer-mode)
+    (add-hook 'scheme-mode-hook #'parinfer-mode)
+    (add-hook 'lisp-mode-hook #'parinfer-mode)))
 
 ;; Avoid some files in dired
 (require 'dired-x)
@@ -55,19 +93,26 @@
   (define-key lisp-mode-map         meta-dot 'slime-edit-definition)
   (define-key intero-mode-map       meta-dot 'intero-goto-definition))
 
+;; I also don't like the default shortcut for indenting a region
+(define-key lisp-mode-map (kbd "C-i") 'indent-region)
+
+;; Please delete trailing whitespaces
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(column-number-mode t)
  '(custom-safe-themes
    (quote
-    ("3cd28471e80be3bd2657ca3f03fbb2884ab669662271794360866ab60b6cb6e6" "72a81c54c97b9e5efcc3ea214382615649ebb539cb4f2fe3a46cd12af72c7607" "9b59e147dbbde5e638ea1cde5ec0a358d5f269d27bd2b893a0947c4a867e14c1" "d5b121d69e48e0f2a84c8e4580f0ba230423391a78fcb4001ccb35d02494d79e" "ff7625ad8aa2615eae96d6b4469fcc7d3d20b2e1ebc63b761a349bebbb9d23cb" "a1a966cf2e87be6a148158c79863440ba2e45aa06cc214341feafe5c6deca4f2" "2b6bd2ebad907ee42b3ffefa4831f348e3652ea8245570cdda67f0034f07db93" "7f3ef7724515515443f961ef87fee655750512473b1f5bf890e2dc7e065f240c" "125fd2180e880802ae98b85f282b17f0aa8fa6cb9fc4f33d7fb19a38c40acef0" "5a970147df34752ed45bfdf0729233abfc085d9673ae7e40210c5e2d8f624b08" "f6a935e77513ba40014aa8467c35961fdb1fc936fa48407ed437083a7ad932de" default)))
+    ("d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "b571f92c9bfaf4a28cb64ae4b4cdbda95241cd62cf07d942be44dc8f46c491f4" "65d9573b64ec94844f95e6055fe7a82451215f551c45275ca5b78653d505bc42" "dc9a8d70c4f94a28aafc7833f8d05667601968e6c9bf998791c39fcb3e4679c9" "3cd28471e80be3bd2657ca3f03fbb2884ab669662271794360866ab60b6cb6e6" "72a81c54c97b9e5efcc3ea214382615649ebb539cb4f2fe3a46cd12af72c7607" "9b59e147dbbde5e638ea1cde5ec0a358d5f269d27bd2b893a0947c4a867e14c1" "d5b121d69e48e0f2a84c8e4580f0ba230423391a78fcb4001ccb35d02494d79e" "ff7625ad8aa2615eae96d6b4469fcc7d3d20b2e1ebc63b761a349bebbb9d23cb" "a1a966cf2e87be6a148158c79863440ba2e45aa06cc214341feafe5c6deca4f2" "2b6bd2ebad907ee42b3ffefa4831f348e3652ea8245570cdda67f0034f07db93" "7f3ef7724515515443f961ef87fee655750512473b1f5bf890e2dc7e065f240c" "125fd2180e880802ae98b85f282b17f0aa8fa6cb9fc4f33d7fb19a38c40acef0" "5a970147df34752ed45bfdf0729233abfc085d9673ae7e40210c5e2d8f624b08" "f6a935e77513ba40014aa8467c35961fdb1fc936fa48407ed437083a7ad932de" default)))
  '(font-use-system-font t)
  '(package-selected-packages
    (quote
-    (sublime-themes blackboard-theme dracula-theme darktooth-theme magit parinfer slime gruvbox-theme evil))))
+    (git-gutter+ solarized-theme molokai-theme use-package paredit sublime-themes blackboard-theme dracula-theme darktooth-theme magit parinfer slime gruvbox-theme evil))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
