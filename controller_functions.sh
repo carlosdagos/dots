@@ -200,6 +200,7 @@ function setup_dotfiles {
   soft_link "dotfiles/dunstrc"                     "$HOME/.dunstrc"
   soft_link "dotfiles/Xdefaults"                   "$HOME/.Xdefaults"
   soft_link "dotfiles/i3/config"                   "$HOME/.config/i3/config"
+  soft_link "dotfiles/i3/i3status.conf"            "$HOME/.config/i3/i3status.conf"
 
   return 0
 }
