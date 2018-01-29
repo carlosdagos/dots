@@ -114,7 +114,7 @@
         (deactivate-mark))
     (message "No region active. You can't yank to clipboard!")))
 
-(let ((yank-kbd (kbd "y")))
+(let ((yank-kbd (kbd "C-y")))
   (define-key evil-visual-state-map yank-kbd nil)
   (define-key evil-visual-state-map yank-kbd 'copy-to-clipboard))
 
