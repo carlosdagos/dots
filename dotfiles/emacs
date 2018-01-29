@@ -99,6 +99,11 @@
 ;; Please delete trailing whitespaces
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+;; Please wrap sexps when I press C-r
+(let ((ctrl-r (kbd "C-r")))
+  (define-key evil-insert-state-map ctrl-r nil)
+  (define-key evil-insert-state-map ctrl-r 'paredit-wrap-sexp))
+
 ;; I use emacs on terminal mode and copying sucks like a mfer
 (defun copy-to-clipboard ()
   (interactive)
