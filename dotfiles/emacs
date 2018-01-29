@@ -99,6 +99,20 @@
 ;; Please delete trailing whitespaces
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+;; I use emacs on terminal mode and copying sucks like a mfer
+(defun copy-to-clipboard ()
+  (interactive)
+  (if (region-active-p)
+      (progn
+        (shell-command-on-region (region-beginning) (region-end) "xsel -i -b")
+        (message "Region yanked to clipboard!")
+        (deactivate-mark))
+    (message "No region active. You can't yank to clipboard!")))
+
+(let ((yank-kbd (kbd "y")))
+  (define-key evil-visual-state-map yank-kbd nil)
+  (define-key evil-visual-state-map yank-kbd 'copy-to-clipboard))
+
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
