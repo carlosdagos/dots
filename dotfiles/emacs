@@ -86,12 +86,17 @@
 ;; Follow the source file to symlinks automatically always
 (setq vc-follow-symlinks t)
 
-;; Enable evil mode and fix M-.
+;; Enable evil mode, fix M-., and enable the keychords
+(require 'key-chord)
+(require 'key-seq)
 (evil-mode 1)
 (let ((meta-dot (kbd "M-.")))
   (define-key evil-normal-state-map meta-dot nil)
   (define-key lisp-mode-map         meta-dot 'slime-edit-definition)
   (define-key intero-mode-map       meta-dot 'intero-goto-definition))
+(key-chord-mode 1)
+(key-chord-define-global "jk" 'evil-normal-state)
+(key-chord-define-global "fd" 'save-buffer)
 
 ;; I also don't like the default shortcut for indenting a region
 (define-key lisp-mode-map (kbd "C-i") 'indent-region)
@@ -131,7 +136,7 @@
  '(font-use-system-font t)
  '(package-selected-packages
    (quote
-    (xclip flatland-black-theme flatland-theme git-gutter+ solarized-theme molokai-theme use-package paredit sublime-themes blackboard-theme dracula-theme darktooth-theme magit parinfer slime gruvbox-theme evil))))
+    (key-seq key-chord xclip flatland-black-theme flatland-theme git-gutter+ solarized-theme molokai-theme use-package paredit sublime-themes blackboard-theme dracula-theme darktooth-theme magit parinfer slime gruvbox-theme evil))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
