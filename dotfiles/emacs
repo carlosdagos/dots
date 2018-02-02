@@ -99,7 +99,10 @@
 (key-chord-define-global "fd" 'save-buffer)
 
 ;; I also don't like the default shortcut for indenting a region
-(define-key lisp-mode-map (kbd "C-i") 'indent-region)
+(let ((ctrl-i (kbd "C-i")))
+  (define-key evil-visual-state-map (kbd "C-i") nil)
+  (define-key evil-visual-state-map (kbd "C-i") 'indent-region))
+
 
 ;; Please delete trailing whitespaces
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
