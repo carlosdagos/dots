@@ -1,0 +1,12 @@
+#!/usr/bin/env nix-shell
+#! nix-shell -i bash -p fzf git
+#
+# This will open the whole git log and allow to search using `fzf` while
+# showing the diff as a preview. When pressing enter it will show the whole
+# diff
+
+git-log --oneline --all | \
+fzf -e --no-sort --tiebreak=index \
+    --preview="git show {+1}" \
+    --bind "enter:execute(git show {+1})"
+
