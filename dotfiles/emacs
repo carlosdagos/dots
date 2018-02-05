@@ -11,7 +11,7 @@
 (package-initialize)
 
 ;; Please use bash for the shell (fish shell works clunky)
-(setq explicit-shell-file-name "/run/current-system/sw/bin/bash")
+(setq explicit-shell-file-name (executable-find "bash"))
 
 ;; Don't use tabs!
 (setq-default indent-tabs-mode nil)
