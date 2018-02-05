@@ -1,0 +1,10 @@
+#!/usr/bin/env nix-shell
+#! nix-shell -i bash -p maim
+#
+# Uses `maim` to take screenshots and store them in `/tmp`.. mayybe I should
+# make this a configurable thing but I'm lazy
+
+screenshots_dir=/tmp/screenshots
+timestamp=`date +%Y-%m-%d-%S-%N`
+maim -s "${screenshots_dir}/${timestamp}.png"
+
