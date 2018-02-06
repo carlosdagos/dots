@@ -8,5 +8,5 @@
 git-log --oneline --all | \
 fzf -e --no-sort --tiebreak=index \
     --preview="git show {+1}" \
-    --bind "enter:execute(git show {+1})"
+    --bind "enter:execute(git difftool {+1}~ {+1} --no-prompt)"
 
