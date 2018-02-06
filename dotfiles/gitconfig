@@ -1,0 +1,9 @@
+[user]
+    name = Carlos D'Agostino
+    email = m@cdagostino.io
+[diff]
+    tool = nvimdiff
+[difftool "nvimdiff"]
+    cmd = "nvim -u ~/.nvimrc -d \"$LOCAL\" \"$REMOTE\" +'colorscheme gruvbox'"
+[alias]
+    compare = log --left-right --graph --cherry-pick --oneline
