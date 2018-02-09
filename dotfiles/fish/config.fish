@@ -1,11 +1,13 @@
 # My aliases
+alias nvim  'nvim -u ~/.nvimrc'
 alias bubu  'brew update ;and brew outdated ;and brew upgrade ;and brew cleanup'
 alias 1pass '1pass --path $HOME/Dropbox/1Password/1Password.agilekeychain'
 alias l     'ls -la'
 alias btc   'http https://api.cryptowat.ch/markets/kraken/btceur/summary | jq -r \'.result | .price.last\''
 
-
 alias emacs-is-stuck 'pkill -SIGUSR2 emacs'
+
+set EDITOR     'nvim'
 
 # Set the $PATH accordingly
 if test -d /usr/local/sbin
@@ -52,4 +54,9 @@ if test -d $HOME/.gvm
    set PATH $PATH "$GVM_ROOT/gos/$go_version/bin"
    set PATH $PATH "$GVM_OVERLAY_PREFIX/bin"
    set PATH $PATH "$GVM_ROOT/bin"
+end
+
+# Source private file if it exists
+if test -f ~/.config/fish/private.fish
+    source ~/.config/fish/private.fish
 end
