@@ -6,5 +6,6 @@
 
 screenshots_dir=/tmp/screenshots
 timestamp=`date +%Y-%m-%d-%S-%N`
+mkdir -p $screenshots_dir
 maim -s "${screenshots_dir}/${timestamp}.png"
 
