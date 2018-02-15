@@ -136,6 +136,7 @@ set number
 let mapleader=','
 set backspace=2
 colorscheme dracula
+colorscheme gruvbox
 syntax on
 set laststatus=2
 set noshowmode
