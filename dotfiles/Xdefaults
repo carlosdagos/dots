@@ -35,8 +35,9 @@ URxvt*colorBD:            #ffffff
 URxvt*cursorColor:        #ff8939
 URxvt*cursorColor2:       #151515
 URxvt*scrollBar:          false
-URxvt*cursorBlink:        true
-URxvt*cursorUnderline:    true
+
+*cursorBlink:        true
+*cursorUnderline:    true
 
 ! ------------------------------------------------------------------------------
 ! Clickable URLs
