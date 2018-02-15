@@ -101,7 +101,9 @@
 ;; I also don't like the default shortcut for indenting a region
 (let ((ctrl-i (kbd "C-i")))
   (define-key evil-visual-state-map ctrl-i nil)
-  (define-key evil-visual-state-map ctrl-i 'indent-region))
+  (define-key evil-visual-state-map ctrl-i 'indent-region)
+  (define-key evil-normal-state-map ctrl-i nil)
+  (define-key evil-normal-state-map ctrl-i 'indent-region))
 
 
 ;; Please delete trailing whitespaces
