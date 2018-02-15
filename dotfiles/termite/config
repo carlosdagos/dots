@@ -1,32 +1,35 @@
 [options]
 font = Envy Code R 10
 
+cursor_shape = underscore
+cursor_blink = true
+
 [colors]
-foreground = #D7D0C7
-background = #151515
+background = #1D2021
+foreground = #EBDBB2
 
 # black
-color0     = #101010
-color8     = #404040
+color0     = #1D2021
+color8     = #928374
 # red
-color1     = #E84F4F
-color9     = #D23D3D
+color1     = #CC241D
+color9     = #FB4934
 # green
-color2     = #B8D68C
-color10    = #A0CF5D
+color2     = #98971A
+color10    = #B8BB26
 # yellow
-color3     = #E1AA5D
-color11    = #F39D21
+color3     = #D79921
+color11    = #FABD2F
 # blue
-color4     = #7DC1CF
-color12    = #4E9FB1
+color4     = #458588
+color12    = #83A598
 # magenta
-color5     = #9B64FB
-color13    = #8542FF
+color5     = #B16286
+color13    = #D3869B
 # cyan
-color6     = #6D878D
-color14    = #42717B
+color6     = #689D6A
+color14    = #8EC07C
 # white
-color7     = #dddddd
-color15    = #dddddd
+color7     = #FBF1C7
+color15    = #EBDBB2
 
