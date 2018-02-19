@@ -5,7 +5,7 @@
 # showing the diff as a preview. When pressing enter it will show the whole
 # diff
 
-git-log --oneline --all | \
+git-log --oneline --all "$@" | \
 fzf -e --no-sort --tiebreak=index \
     --preview="git show {+1}" \
     --bind "enter:execute(git difftool {+1}~ {+1} --no-prompt)"
