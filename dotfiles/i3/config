@@ -175,4 +175,13 @@ client.background       #1d1d1d
 # finds out, if available)
 bar {
         status_command i3status -c /home/carlos/.i3status.conf
+        colors {
+                background #282828
+                statusline #FBF1C7
+                separator  #282828
+                focused_workspace  #D79921 #D79921 #1D2021
+                active_workspace   #83A598 #665C54 #F9F5D7
+                inactive_workspace #1D2021 #282828 #D5C4A1
+                urgent_workspace   #CC241D #9D0006 #FFFFFF
+        }
 }
