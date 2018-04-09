@@ -29,7 +29,6 @@ Plug 'wikitopian/hardmode'
 Plug 'w0ng/vim-hybrid'
 Plug 'gosukiwi/vim-atom-dark'
 Plug 'Valloric/MatchTagAlways'
-Plug 'morhetz/gruvbox'
 Plug 'ElmCast/elm-vim'
 Plug 'morhetz/gruvbox'
 Plug 'raichoo/purescript-vim'
@@ -136,11 +135,13 @@ set relativenumber
 set number
 let mapleader=','
 set backspace=2
-colorscheme dracula
 colorscheme gruvbox
 syntax on
 set laststatus=2
 set noshowmode
+
+set background=dark
+let g:gruvbox_contrast_dark = 'medium'
 
 let s:uname = system("uname -a")
 if s:uname =~ "NixOS"
