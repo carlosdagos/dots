@@ -30,6 +30,10 @@ if test -d $HOME/.bin
     set PATH $PATH $HOME/.bin
 end
 
+if test -d /usr/local/opt/curl/bin/
+    set PATH /usr/local/opt/curl/bin $PATH
+end
+
 set -gx LC_ALL en_US.UTF-8
 set -gx LANG   en_US.UTF-8
 
