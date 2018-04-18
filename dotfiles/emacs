@@ -1,14 +1,16 @@
 (require 'package)
-
-(let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
-		    (not (gnutls-available-p))))
-       (url (concat (if no-ssl "http" "https") "://melpa.org/packages/")))
-  (add-to-list 'package-archives (cons "melpa" url) t))
-(when (< emacs-major-version 24)
-  ;; For important compatibility libraries like cl-lib
-  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+(setq
+ package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                    ("org" . "http://orgmode.org/elpa/")
+                    ("melpa" . "http://melpa.org/packages/")
+                    ("melpa-stable" . "http://stable.melpa.org/packages/"))
+ package-archive-priorities '(("melpa-stable" . 1)))
 
 (package-initialize)
+(when (not package-archive-contents)
+  (package-refresh-contents)
+  (package-install 'use-package))
+(require 'use-package)
 
 ;; Please use bash for the shell (fish shell works clunky)
 (setq explicit-shell-file-name (executable-find "bash"))
@@ -17,8 +19,9 @@
 (setq-default indent-tabs-mode nil)
 
 ;; Hide the scroolbar, menubar and toolbar
-(scroll-bar-mode -1)
-(if window-system
+(when (fboundp 'scroll-bar-mode)
+  (scroll-bar-mode -1))
+(when window-system
   (tool-bar-mode -1))
 (menu-bar-mode -1)
 
@@ -27,20 +30,27 @@
 
 ;; Set up the pretty parens
 (show-paren-mode 1)
-(require 'paren)
-(set-face-background 'show-paren-match (face-background 'default))
-(set-face-background 'show-paren-match "#def")
-(set-face-attribute  'show-paren-match nil :weight 'extra-bold)
-(require 'rainbow-delimiters)
-(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+(use-package paren
+  :config
+  (set-face-background 'show-paren-match (face-background 'default))
+  (set-face-background 'show-paren-match "#def")
+  (set-face-attribute  'show-paren-match nil :weight 'extra-bold))
+
+(use-package rainbow-delimiters
+  :config
+  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+
 
 ;; Set up an 80 column rule
-(require 'whitespace)
-(setq whitespace-line-column 80) ;; limit line length
-(setq whitespace-style '(face lines-tail))
+(use-package whitespace
+  :config
+  (setq whitespace-line-column 78) ;; limit line length
+  (setq whitespace-style '(face lines-tail)))
+
 (global-whitespace-mode +1)
 
 ;; Enable the git gutter
+(use-package git-gutter+)
 (global-git-gutter+-mode)
 (setq git-gutter+-window-width  2)
 (setq git-gutter+-modified-sign "~ ")
@@ -74,8 +84,27 @@
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
 
+;; Set up ensime
+(use-package ensime
+  :ensure t
+  :pin    melpa-stable)
+
+(use-package scala-mode
+  :interpreter
+  ("scala" . scala-mode))
+
+(use-package sbt-mode
+  :commands sbt-start sbt-command
+  :config
+  ;; WORKAROUND: https://github.com/ensime/emacs-sbt-mode/issues/31
+  ;; allows using SPACE when in the minibuffer
+  (substitute-key-definition
+   'minibuffer-complete-word
+   'self-insert-command
+   minibuffer-local-completion-map))
+
 ;; Avoid some files in dired
-(require 'dired-x)
+(use-package dired-x)
 (setq-default dired-omit-files-p t)
 (setq dired-omit-files (concat dired-omit-files "\\|^\\..+$|\\.fasl$"))
 
@@ -84,8 +113,9 @@
 (setq slime-contribs '(slime-fancy))
 
 ;; Set up the haskell stuff
-(require 'intero)
-(add-hook 'haskell-mode-hook 'intero-mode)
+(use-package intero
+  :init
+  (add-hook 'haskell-mode-hook 'intero-mode))
 
 ;; Don't litter my directories with backup files
 (setq backup-directory-alist `(("." . "~/.emacs.d/backup")))
@@ -95,13 +125,15 @@
 (setq vc-follow-symlinks t)
 
 ;; Enable evil mode, fix M-., and enable the keychords
-(require 'key-chord)
-(require 'key-seq)
+(use-package evil)
+(use-package key-chord)
+(use-package key-seq)
 (evil-mode 1)
 (let ((meta-dot (kbd "M-.")))
   (define-key evil-normal-state-map meta-dot nil)
   (define-key lisp-mode-map         meta-dot 'slime-edit-definition)
   (define-key intero-mode-map       meta-dot 'intero-goto-definition))
+
 (key-chord-mode 1)
 (key-chord-define-global "jk" 'evil-normal-state)
 (key-chord-define-global "fd" 'save-buffer)
@@ -112,7 +144,6 @@
   (define-key evil-visual-state-map ctrl-i 'indent-region)
   (define-key evil-normal-state-map ctrl-i nil)
   (define-key evil-normal-state-map ctrl-i 'indent-region))
-
 
 ;; Please delete trailing whitespaces
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
@@ -149,7 +180,7 @@
  '(font-use-system-font t)
  '(package-selected-packages
    (quote
-    (markdown-mode key-seq key-chord xclip flatland-black-theme flatland-theme git-gutter+ solarized-theme molokai-theme use-package paredit sublime-themes blackboard-theme dracula-theme darktooth-theme magit parinfer slime gruvbox-theme evil))))
+    (ensime markdown-mode key-seq key-chord xclip flatland-black-theme flatland-theme git-gutter+ solarized-theme molokai-theme use-package paredit sublime-themes blackboard-theme dracula-theme darktooth-theme magit parinfer slime gruvbox-theme evil))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
