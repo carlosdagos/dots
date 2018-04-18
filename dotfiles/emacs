@@ -58,6 +58,7 @@
 (setq git-gutter+-deleted-sign  "- ")
 
 ;; Set up parinfer
+(use-package paredit :ensure t)
 (use-package parinfer
   :ensure t
   :bind
@@ -125,7 +126,7 @@
 (setq vc-follow-symlinks t)
 
 ;; Enable evil mode, fix M-., and enable the keychords
-(use-package evil)
+(use-package evil :ensure t)
 (use-package key-chord)
 (use-package key-seq)
 (evil-mode 1)
