@@ -34,6 +34,7 @@ Plug 'ElmCast/elm-vim'
 Plug 'morhetz/gruvbox'
 Plug 'raichoo/purescript-vim'
 Plug 'LnL7/vim-nix'
+Plug 'LnL7/vim-fish'
 
 function! DoRemote(arg)
   UpdateRemotePlugins
@@ -136,11 +137,13 @@ set relativenumber
 set number
 let mapleader=','
 set backspace=2
-colorscheme dracula
 colorscheme gruvbox
 syntax on
 set laststatus=2
 set noshowmode
+
+set background=dark
+let g:gruvbox_contrast_dark = 'dark'
 
 let s:uname = system("uname -a")
 if s:uname =~ "NixOS"
