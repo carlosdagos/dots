@@ -3,6 +3,7 @@ alias nvim  'nvim -u ~/.nvimrc'
 alias bubu  'brew update ;and brew outdated ;and brew upgrade ;and brew cleanup'
 alias 1pass '1pass --path $HOME/Dropbox/1Password/1Password.agilekeychain'
 alias l     'ls -la'
+alias la    'ls -la'
 alias btc   'http https://api.cryptowat.ch/markets/kraken/btceur/summary | jq -r \'.result | .price.last\''
 
 alias emacs-is-stuck 'pkill -SIGUSR2 emacs'
@@ -28,6 +29,10 @@ end
 
 if test -d $HOME/.bin
     set PATH $PATH $HOME/.bin
+end
+
+if test -d /usr/local/opt/curl/bin/
+    set PATH /usr/local/opt/curl/bin $PATH
 end
 
 set -gx LC_ALL en_US.UTF-8
