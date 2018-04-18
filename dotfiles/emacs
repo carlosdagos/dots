@@ -21,7 +21,7 @@
 ;; Hide the scroolbar, menubar and toolbar
 (when (fboundp 'scroll-bar-mode)
   (scroll-bar-mode -1))
-(if window-system
+(when window-system
   (tool-bar-mode -1))
 (menu-bar-mode -1)
 
