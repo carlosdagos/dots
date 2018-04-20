@@ -1,8 +1,8 @@
 (require 'package)
 (setq
- package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                    ("org" . "http://orgmode.org/elpa/")
-                    ("melpa" . "http://melpa.org/packages/")
+ package-archives '(("gnu"          . "http://elpa.gnu.org/packages/")
+                    ("org"          . "http://orgmode.org/elpa/")
+                    ("melpa"        . "http://melpa.org/packages/")
                     ("melpa-stable" . "http://stable.melpa.org/packages/"))
  package-archive-priorities '(("melpa-stable" . 1)))
 
@@ -57,6 +57,15 @@
 (setq git-gutter+-added-sign    "+ ")
 (setq git-gutter+-deleted-sign  "- ")
 
+
+;; Enable evil mode,
+(use-package evil
+  :demand t
+  :config
+  (evil-mode 1)
+  (global-set-key (kbd "C-,") nil))
+
+
 ;; Set up parinfer
 (use-package paredit :ensure t)
 (use-package parinfer
@@ -77,22 +86,34 @@
     (add-hook 'scheme-mode-hook #'parinfer-mode)
     (add-hook 'lisp-mode-hook #'parinfer-mode)))
 
+
 (use-package markdown-mode
   :ensure t
   :commands (markdown-mode gfm mode)
   :mode (("README\\.md\\'" . gfm-mode)
-         ("\\.md\\'" . markdown-mode)
+         ("\\.md\\'"       . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
+
 
 ;; Set up ensime
 (use-package ensime
   :ensure t
   :pin    melpa-stable)
 
+
 (use-package scala-mode
   :interpreter
   ("scala" . scala-mode))
+
+
+(add-hook 'scala-mode-hook
+          (lambda ()
+            (show-paren-mode)
+            (smartparens-mode)
+            (company-mode)
+            (ensime-mode)))
+
 
 (use-package sbt-mode
   :commands sbt-start sbt-command
@@ -103,6 +124,36 @@
    'minibuffer-complete-word
    'self-insert-command
    minibuffer-local-completion-map))
+
+
+(use-package projectile
+  :demand
+  :init   (setq projectile-use-git-grep t)
+  :config (projectile-global-mode t)
+  :bind   (("s-f" . projectile-find-file)
+           ("s-F" . projectile-grep)))
+
+(use-package eldoc
+  :ensure nil
+  :diminish eldoc-mode
+  :commands eldoc-mode)
+
+
+(use-package company-mode
+  :diminish company-mode
+  :commands company-mode
+  :init
+  (setq
+   company-dabbrev-ignore-case nil
+   company-dabbrev-code-ignore-case nil
+   company-dabbrev-downcase nil
+   company-idle-delay 0
+   company-minimum-prefix-length 4)
+  :config
+  ;; disables TAB in company-mode, freeing it for something else
+  (define-key company-active-map [tab] nil)
+  (define-key company-active-map (kbd "TAB") nil))
+
 
 ;; Avoid some files in dired
 (use-package dired-x)
@@ -125,19 +176,23 @@
 ;; Follow the source file to symlinks automatically always
 (setq vc-follow-symlinks t)
 
-;; Enable evil mode, fix M-., and enable the keychords
-(use-package evil :ensure t)
+;; Fix M-., and enable the keychords
 (use-package key-chord)
 (use-package key-seq)
-(evil-mode 1)
+
 (let ((meta-dot (kbd "M-.")))
   (define-key evil-normal-state-map meta-dot nil)
+  (global-set-key                   meta-dot 'projectile-find-tag)
+  (define-key ensime-mode-map       meta-dot 'ensime-edit-definition)
+  (define-key scala-mode-map        meta-dot 'ensime-edit-definition)
   (define-key lisp-mode-map         meta-dot 'slime-edit-definition)
-  (define-key intero-mode-map       meta-dot 'intero-goto-definition))
+  (define-key intero-mode-map       meta-dot 'intero-goto-definition)
+  (define-key emacs-lisp-mode-map   meta-dot 'xref-find-definitions))
 
 (key-chord-mode 1)
 (key-chord-define-global "jk" 'evil-normal-state)
 (key-chord-define-global "fd" 'save-buffer)
+
 
 ;; I also don't like the default shortcut for indenting a region
 (let ((ctrl-i (kbd "C-i")))
@@ -146,13 +201,16 @@
   (define-key evil-normal-state-map ctrl-i nil)
   (define-key evil-normal-state-map ctrl-i 'indent-region))
 
+
 ;; Please delete trailing whitespaces
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
 
 ;; Please wrap sexps when I press C-r
 (let ((ctrl-r (kbd "C-r")))
   (define-key evil-insert-state-map ctrl-r nil)
   (define-key evil-insert-state-map ctrl-r 'paredit-wrap-sexp))
+
 
 ;; I use emacs on terminal mode and copying sucks like a mfer
 (defun copy-to-clipboard ()
@@ -163,6 +221,7 @@
         (message "Region yanked to clipboard!")
         (deactivate-mark))
     (message "No region active. You can't yank to clipboard!")))
+
 
 (let ((yank-kbd (kbd "C-y")))
   (define-key evil-visual-state-map yank-kbd nil)
@@ -181,7 +240,7 @@
  '(font-use-system-font t)
  '(package-selected-packages
    (quote
-    (ensime markdown-mode key-seq key-chord xclip flatland-black-theme flatland-theme git-gutter+ solarized-theme molokai-theme use-package paredit sublime-themes blackboard-theme dracula-theme darktooth-theme magit parinfer slime gruvbox-theme evil))))
+    (jabber projectile ensime markdown-mode key-seq key-chord xclip flatland-black-theme flatland-theme git-gutter+ solarized-theme molokai-theme use-package paredit sublime-themes blackboard-theme dracula-theme darktooth-theme magit parinfer slime gruvbox-theme evil))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
