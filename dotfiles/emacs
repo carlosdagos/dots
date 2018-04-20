@@ -192,6 +192,7 @@
 (key-chord-mode 1)
 (key-chord-define-global "jk" 'evil-normal-state)
 (key-chord-define-global "fd" 'save-buffer)
+(key-chord-define-global ",," 'execute-extended-command)
 
 
 ;; I also don't like the default shortcut for indenting a region
