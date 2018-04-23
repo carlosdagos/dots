@@ -33,7 +33,7 @@ Plug 'ElmCast/elm-vim'
 Plug 'morhetz/gruvbox'
 Plug 'raichoo/purescript-vim'
 Plug 'LnL7/vim-nix'
-Plug 'LnL7/vim-fish'
+Plug 'dag/vim-fish'
 
 function! DoRemote(arg)
   UpdateRemotePlugins
@@ -50,7 +50,8 @@ call plug#end()              " required
 " ================================
 
 " Use deoplete
-let g:python3_host_prog = '/usr/local/bin/python3'
+let s:python3exec = system("which python3")
+let g:python3_host_prog = s:python3exec
 let g:deoplete#enable_at_startup = 1
 
 " Neomake on save
