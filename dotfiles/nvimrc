@@ -50,7 +50,7 @@ call plug#end()              " required
 " ================================
 
 " Use deoplete
-let s:python3exec = system("which python3")
+let s:python3exec = substitute(system("which python3"), '\n\+$', '', '')
 let g:python3_host_prog = s:python3exec
 let g:deoplete#enable_at_startup = 1
 
