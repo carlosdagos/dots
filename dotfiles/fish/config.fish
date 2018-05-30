@@ -5,6 +5,7 @@ alias 1pass '1pass --path $HOME/Dropbox/1Password/1Password.agilekeychain'
 alias l     'ls -la'
 alias la    'ls -la'
 alias btc   'http https://api.cryptowat.ch/markets/kraken/btceur/summary | jq -r \'.result | .price.last\''
+alias ec    'emacsclient -t'
 
 alias emacs-is-stuck 'pkill -SIGUSR2 emacs'
 
