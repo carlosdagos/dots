@@ -90,6 +90,12 @@
     (setq git-gutter+-added-sign    "+ ")
     (setq git-gutter+-deleted-sign  "- ")))
 
+(use-package evil-goggles
+  :ensure t
+  :config
+  (evil-goggles-mode)
+  (evil-goggles-use-diff-faces))
+
 ;; Enable evil mode,
 (use-package evil
   :demand t
@@ -108,11 +114,11 @@
   (progn
     (setq parinfer-extensions
           '(defaults       ; should be included.
-            pretty-parens  ; different paren styles for different modes.
-            evil           ; If you use Evil.
-            paredit        ; Introduce some paredit commands.
-            smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
-            smart-yank))   ; Yank behavior depend on mode.
+             pretty-parens  ; different paren styles for different modes.
+             evil           ; If you use Evil.
+             paredit        ; Introduce some paredit commands.
+             smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
+             smart-yank))   ; Yank behavior depend on mode.
     (mapc (rcurry 'add-hook 'parinfer-mode)
           '(emacs-lisp-mode-hook
             common-lisp-mode-hook
@@ -147,9 +153,10 @@
   (mapc (curry 'add-hook 'scala-mode-hook)
         '(show-paren-mode
           smartparens-mode
-          company-mode
           ensime-mode)))
 
+(use-package groovy-mode
+  :pin melpa-stable)
 
 (use-package sbt-mode
   :commands sbt-start sbt-command
@@ -161,18 +168,40 @@
    'self-insert-command
    minibuffer-local-completion-map))
 
+(use-package flx-ido
+  :pin melpa-stable
+  :config
+  (ido-mode 1)
+  (ido-everywhere 1)
+  (flx-ido-mode 1)
+  ;; disable ido faces to see flx highlights.
+  (setq ido-enable-flex-matching t)
+  (setq ido-use-faces nil))
+
+(use-package smex)
+(use-package ido-vertical-mode
+  :pin melpa-stable
+  :config
+  (ido-vertical-mode 1)
+  (setq ido-vertical-define-keys 'C-n-C-p-up-and-down))
 
 (use-package projectile
   :demand
   :init   (setq projectile-use-git-grep t)
   :config
-  (projectile-global-mode t))
+  (projectile-global-mode t)
+  (setq projectile-completion-system 'ido))
 
+(use-package fzf
+  :demand
+  :pin    melpa)
 
 (use-package eldoc
   :ensure nil
   :diminish eldoc-mode
-  :commands eldoc-mode)
+  :commands eldoc-mode
+  :config
+  (global-eldoc-mode))
 
 
 (use-package company-mode
@@ -188,8 +217,11 @@
   :config
   ;; disables TAB in company-mode, freeing it for something else
   (define-key company-active-map [tab] nil)
-  (define-key company-active-map (kbd "TAB") nil))
+  (define-key company-active-map (kbd "TAB") nil)
+  (global-company-mode))
 
+;; Use real line numbers
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
 ;; Avoid some files in dired
 (use-package dired-x
@@ -209,8 +241,12 @@
 
 
 ;; Don't litter my directories with backup files
-(setq backup-directory-alist `(("." . "~/.emacs.d/backup")))
+(setq backup-directory "~/.emacs.d/backup/")
 (setq backup-by-copying t)
+(setq backup-directory-alist
+      `((".*" . ,backup-directory)))
+(setq auto-save-file-name-transforms
+      `((".*" ,backup-directory t)))
 
 ;; Follow the source file to symlinks automatically always
 (setq vc-follow-symlinks t)
@@ -231,7 +267,9 @@
 (key-chord-mode 1)
 (key-chord-define-global "jk" 'evil-normal-state)
 (key-chord-define-global "fd" 'save-buffer)
-(key-chord-define-global ",," 'execute-extended-command)
+(key-chord-define-global ",," 'smex)
+(key-chord-define-global ";b" 'projectile-switch-to-buffer)
+(key-chord-define-global ";a" 'projectile-switch-project)
 
 ;; Fix some mode maps
 (let ((ctrl-t (kbd "C-t")))
@@ -267,8 +305,13 @@
 (defun copy-to-clipboard ()
   (interactive)
   (if (region-active-p)
-      (progn
-        (shell-command-on-region (region-beginning) (region-end) "xsel -i -b")
+      (lexical-let* ((xsel-cmd   "xsel -i -b")
+                     (pbcopy-cmd "pbcopy")
+                     (osx-p      (string-equal system-type "darwin")))
+        (shell-command-on-region
+         (region-beginning)
+         (region-end)
+         (if osx-p pbcopy-cmd xsel-cmd))
         (message "Region yanked to clipboard!")
         (deactivate-mark))
     (message "No region active. You can't yank to clipboard!")))
@@ -279,6 +322,30 @@
   (define-key evil-visual-state-map yank-kbd 'copy-to-clipboard))
 
 
+;; Show me git blames per line
+(defun git-blame-line ()
+  "Runs `git blame` on the current line and
+   adds the commit id to the kill ring"
+  (interactive)
+  (let* ((line-number (save-excursion
+                        (goto-char (point-at-bol))
+                        (+ 1 (count-lines 1 (point)))))
+         (line-arg (format "%d,%d" line-number line-number))
+         (commit-buf (generate-new-buffer "*git-blame-line-commit*")))
+    (call-process "git" nil commit-buf nil
+                  "blame" (buffer-file-name) "-L" line-arg)
+    (let* ((commit-id (with-current-buffer commit-buf
+                        (buffer-substring 1 9)))
+           (log-buf (generate-new-buffer "*git-blame-line-log*")))
+      (kill-new commit-id)
+      (call-process "git" nil log-buf nil
+                    "log" "-1" "--pretty=%h [%ar] %an: %s" commit-id)
+      (with-current-buffer log-buf
+        (message "%s" (string-trim (buffer-string))))
+      (kill-buffer log-buf))
+    (kill-buffer commit-buf)))
+
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -287,7 +354,7 @@
  '(column-number-mode t)
  '(custom-safe-themes
    (quote
-    ("ed0b4fc082715fc1d6a547650752cd8ec76c400ef72eb159543db1770a27caa7" "021720af46e6e78e2be7875b2b5b05344f4e21fad70d17af7acfd6922386b61e" "3fa81193ab414a4d54cde427c2662337c2cab5dd4eb17ffff0d90bca97581eb6" "4154caa8409ff2eb6f74c913741420e7103b9ea26c3c7d1a5a16592d0d2f43e0" "c90fd1c669f260120d32ddd20168343f5c717ca69e95d2f805e42e88430c340e" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "b571f92c9bfaf4a28cb64ae4b4cdbda95241cd62cf07d942be44dc8f46c491f4" "65d9573b64ec94844f95e6055fe7a82451215f551c45275ca5b78653d505bc42" "dc9a8d70c4f94a28aafc7833f8d05667601968e6c9bf998791c39fcb3e4679c9" "3cd28471e80be3bd2657ca3f03fbb2884ab669662271794360866ab60b6cb6e6" "72a81c54c97b9e5efcc3ea214382615649ebb539cb4f2fe3a46cd12af72c7607" "9b59e147dbbde5e638ea1cde5ec0a358d5f269d27bd2b893a0947c4a867e14c1" "d5b121d69e48e0f2a84c8e4580f0ba230423391a78fcb4001ccb35d02494d79e" "ff7625ad8aa2615eae96d6b4469fcc7d3d20b2e1ebc63b761a349bebbb9d23cb" "a1a966cf2e87be6a148158c79863440ba2e45aa06cc214341feafe5c6deca4f2" "2b6bd2ebad907ee42b3ffefa4831f348e3652ea8245570cdda67f0034f07db93" "7f3ef7724515515443f961ef87fee655750512473b1f5bf890e2dc7e065f240c" "125fd2180e880802ae98b85f282b17f0aa8fa6cb9fc4f33d7fb19a38c40acef0" "5a970147df34752ed45bfdf0729233abfc085d9673ae7e40210c5e2d8f624b08" "f6a935e77513ba40014aa8467c35961fdb1fc936fa48407ed437083a7ad932de" default)))
+    ("42b9d85321f5a152a6aef0cc8173e701f572175d6711361955ecfb4943fe93af" "ed0b4fc082715fc1d6a547650752cd8ec76c400ef72eb159543db1770a27caa7" "021720af46e6e78e2be7875b2b5b05344f4e21fad70d17af7acfd6922386b61e" "3fa81193ab414a4d54cde427c2662337c2cab5dd4eb17ffff0d90bca97581eb6" "4154caa8409ff2eb6f74c913741420e7103b9ea26c3c7d1a5a16592d0d2f43e0" "c90fd1c669f260120d32ddd20168343f5c717ca69e95d2f805e42e88430c340e" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "b571f92c9bfaf4a28cb64ae4b4cdbda95241cd62cf07d942be44dc8f46c491f4" "65d9573b64ec94844f95e6055fe7a82451215f551c45275ca5b78653d505bc42" "dc9a8d70c4f94a28aafc7833f8d05667601968e6c9bf998791c39fcb3e4679c9" "3cd28471e80be3bd2657ca3f03fbb2884ab669662271794360866ab60b6cb6e6" "72a81c54c97b9e5efcc3ea214382615649ebb539cb4f2fe3a46cd12af72c7607" "9b59e147dbbde5e638ea1cde5ec0a358d5f269d27bd2b893a0947c4a867e14c1" "d5b121d69e48e0f2a84c8e4580f0ba230423391a78fcb4001ccb35d02494d79e" "ff7625ad8aa2615eae96d6b4469fcc7d3d20b2e1ebc63b761a349bebbb9d23cb" "a1a966cf2e87be6a148158c79863440ba2e45aa06cc214341feafe5c6deca4f2" "2b6bd2ebad907ee42b3ffefa4831f348e3652ea8245570cdda67f0034f07db93" "7f3ef7724515515443f961ef87fee655750512473b1f5bf890e2dc7e065f240c" "125fd2180e880802ae98b85f282b17f0aa8fa6cb9fc4f33d7fb19a38c40acef0" "5a970147df34752ed45bfdf0729233abfc085d9673ae7e40210c5e2d8f624b08" "f6a935e77513ba40014aa8467c35961fdb1fc936fa48407ed437083a7ad932de" default)))
  '(ensime-implicit-gutter-icons t)
  '(ensime-sem-high-faces
    (quote
@@ -305,10 +372,13 @@
      (implicitParams . ensime-implicit-highlight)
      (deprecated :strike-through "dark gray"))))
  '(ensime-startup-notification nil)
+ '(ensime-typecheck-idle-interval 5)
+ '(ensime-typecheck-interval 5)
  '(font-use-system-font t)
+ '(line-number-mode nil)
  '(package-selected-packages
    (quote
-    (yaml-mode jabber projectile ensime markdown-mode key-seq key-chord xclip flatland-black-theme flatland-theme git-gutter+ solarized-theme molokai-theme use-package paredit sublime-themes blackboard-theme dracula-theme darktooth-theme magit parinfer slime gruvbox-theme evil))))
+    (smex ido-vertical-mode flx-ido grizzl fzf yaml-mode jabber projectile ensime markdown-mode key-seq key-chord xclip flatland-black-theme flatland-theme git-gutter+ solarized-theme molokai-theme use-package paredit sublime-themes blackboard-theme dracula-theme darktooth-theme magit parinfer slime gruvbox-theme evil))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
