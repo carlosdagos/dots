@@ -105,8 +105,18 @@
   (define-key evil-normal-state-map (kbd "C-,") nil))
 
 
+;; Set up paredit
+(use-package paredit
+  :ensure t
+  :init
+  (progn
+    (mapc (rcurry 'add-hook 'paredit-mode)
+          '(emacs-lisp-mode-hook
+            common-lisp-mode-hook
+            scheme-mode-hook
+            lisp-mode-hook))))
+
 ;; Set up parinfer
-(use-package paredit :ensure t)
 (use-package parinfer
   :ensure t
   :bind
@@ -283,9 +293,17 @@
 (setq vc-follow-symlinks t)
 
 ;; Fix M-., and enable the keychords
-(use-package key-chord)
 (use-package key-seq)
+(use-package key-chord
+  :config
+  (key-chord-mode 1)
+  (key-chord-define-global "jk" 'evil-normal-state)
+  (key-chord-define-global "fd" 'save-buffer)
+  (key-chord-define-global ",," 'smex)
+  (key-chord-define-global ";b" 'projectile-switch-to-buffer)
+  (key-chord-define-global ";a" 'projectile-switch-project))
 
+;; Fix some mode maps
 (let ((meta-dot (kbd "M-.")))
   (define-key evil-normal-state-map meta-dot nil)
   (global-set-key                   meta-dot 'projectile-find-tag)
@@ -295,14 +313,6 @@
   (define-key intero-mode-map       meta-dot 'intero-goto-definition)
   (define-key emacs-lisp-mode-map   meta-dot 'xref-find-definitions))
 
-(key-chord-mode 1)
-(key-chord-define-global "jk" 'evil-normal-state)
-(key-chord-define-global "fd" 'save-buffer)
-(key-chord-define-global ",," 'smex)
-(key-chord-define-global ";b" 'projectile-switch-to-buffer)
-(key-chord-define-global ";a" 'projectile-switch-project)
-
-;; Fix some mode maps
 (let ((ctrl-t (kbd "C-t")))
   (define-key evil-normal-state-map ctrl-t nil)
   (define-key scala-mode-map        ctrl-t 'ensime-type-at-point))
@@ -315,22 +325,18 @@
   (define-key evil-normal-state-map ctrl-i nil)
   (define-key evil-normal-state-map ctrl-i 'indent-region))
 
-
 ;; Please delete trailing whitespaces
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
-
 
 ;; Please wrap sexps when I press C-r
 (let ((ctrl-r (kbd "C-r")))
   (define-key evil-insert-state-map ctrl-r nil)
   (define-key evil-insert-state-map ctrl-r 'paredit-wrap-sexp))
 
-
 ;; Please find project files when I press C-P
 (let ((ctrl-p (kbd "C-p")))
   (define-key evil-normal-state-map ctrl-p nil)
   (define-key evil-normal-state-map ctrl-p 'projectile-find-file))
-
 
 ;; I use emacs on terminal mode and copying sucks like a mfer
 (defun copy-to-clipboard ()
@@ -346,7 +352,6 @@
         (message "Region yanked to clipboard!")
         (deactivate-mark))
     (message "No region active. You can't yank to clipboard!")))
-
 
 (let ((yank-kbd (kbd "C-y")))
   (define-key evil-visual-state-map yank-kbd nil)
@@ -409,7 +414,7 @@
  '(line-number-mode nil)
  '(package-selected-packages
    (quote
-    (tuareg merlin evil-goggles groovy-mode smex ido-vertical-mode flx-ido grizzl fzf yaml-mode jabber projectile ensime markdown-mode key-seq key-chord xclip flatland-black-theme flatland-theme git-gutter+ solarized-theme molokai-theme use-package paredit sublime-themes blackboard-theme dracula-theme darktooth-theme magit parinfer slime gruvbox-theme evil))))
+    (org-jira tuareg merlin evil-goggles groovy-mode smex ido-vertical-mode flx-ido grizzl fzf yaml-mode jabber projectile ensime markdown-mode key-seq key-chord xclip flatland-black-theme flatland-theme git-gutter+ solarized-theme molokai-theme use-package paredit sublime-themes blackboard-theme dracula-theme darktooth-theme magit parinfer slime gruvbox-theme evil))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
