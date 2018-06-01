@@ -9,7 +9,13 @@ alias ec    'emacsclient -t'
 
 alias emacs-is-stuck 'pkill -SIGUSR2 emacs'
 
-set EDITOR     'nvim'
+# Use emacsclient as my editor
+set EDITOR     'ec'
+
+# Load the opam env if it's installed
+if type -q opam
+    eval (opam config env)
+end
 
 # Set the $PATH accordingly
 if test -d /usr/local/sbin
