@@ -239,6 +239,36 @@
   (mapc (curry 'add-hook 'haskell-mode-hook)
         '(intero-mode whitespace-mode)))
 
+;; Set up the Ocaml stuff
+(use-package merlin
+  :ensure t)
+
+(use-package tuareg
+  :ensure t
+  :config
+  ;; Use Merlin
+  (setq merlin-command 'opam)
+  (add-to-list 'auto-mode-alist '("/\\.merlin\\'" . conf-mode))
+  (when (functionp 'merlin-document)
+    (define-key tuareg-mode-map (kbd "\C-c\C-h") 'merlin-document))
+  ;; Run Merlin if a .merlin file in the parent dirs is detected
+  (add-hook 'tuareg-mode-hook
+            (lambda()
+              (let ((fn (buffer-file-name)))
+                (if (and fn (locate-dominating-file fn ".merlin"))
+                    (merlin-mode)))))
+  ;; Define some keys
+  (define-key tuareg-mode-map (kbd "M-n") 'next-error)
+  (define-key tuareg-mode-map (kbd "M-p") 'previous-error)
+  (define-key tuareg-mode-map (kbd "M-.") 'merlin-locate)
+  (define-key tuareg-mode-map (kbd "M-,") 'merlin-pop-stack)
+  (define-key tuareg-mode-map (kbd "C-t") 'merlin-type-enclosing)
+  (define-key tuareg-mode-map (kbd "C-S-)") 'merlin-phrase-next)
+  (define-key tuareg-mode-map (kbd "C-S-(") 'merlin-phrase-prev)
+  ;; Enable some modes
+  (mapc (curry 'add-hook 'tuareg-mode-hook)
+        '(whitespace-mode merlin-mode company-mode)))
+
 
 ;; Don't litter my directories with backup files
 (setq backup-directory "~/.emacs.d/backup/")
@@ -378,7 +408,7 @@
  '(line-number-mode nil)
  '(package-selected-packages
    (quote
-    (smex ido-vertical-mode flx-ido grizzl fzf yaml-mode jabber projectile ensime markdown-mode key-seq key-chord xclip flatland-black-theme flatland-theme git-gutter+ solarized-theme molokai-theme use-package paredit sublime-themes blackboard-theme dracula-theme darktooth-theme magit parinfer slime gruvbox-theme evil))))
+    (tuareg merlin evil-goggles groovy-mode smex ido-vertical-mode flx-ido grizzl fzf yaml-mode jabber projectile ensime markdown-mode key-seq key-chord xclip flatland-black-theme flatland-theme git-gutter+ solarized-theme molokai-theme use-package paredit sublime-themes blackboard-theme dracula-theme darktooth-theme magit parinfer slime gruvbox-theme evil))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
