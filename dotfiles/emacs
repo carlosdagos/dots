@@ -78,6 +78,12 @@
   (tool-bar-mode -1))
 (menu-bar-mode -1)
 
+;; Use line numbers when programming
+
+(if (version< emacs-version "26.1")
+  (add-hook 'prog-mode-hook 'line-number-mode)
+  (add-hook 'prog-mode-hook 'display-line-numbers-mode))
+
 ;; Load dark gruvbox
 (use-package gruvbox-theme
   :ensure t
@@ -112,7 +118,9 @@
   :pin melpa-stable
   :config
   (add-hook 'yaml-mode-hook 'flycheck-mode-hook)
-  (add-hook 'yaml-mode-hook 'display-line-numbers-mode))
+  (if (version< emacs-version "26.1")
+    (add-hook 'yaml-mode-hook 'line-number-mode)
+    (add-hook 'yaml-mode-hook 'display-line-numbers-mode)))
 
 (use-package flycheck-yamllint
   :ensure t
@@ -319,9 +327,6 @@
   (define-key company-active-map (kbd "TAB") nil)
   (global-company-mode))
 
-;; Use real line numbers
-(progn
-  (add-hook 'prog-mode-hook 'display-line-numbers-mode))
 
 ;; Avoid some files in dired
 (use-package dired-x
@@ -587,7 +592,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "nil" :family "Envy Code R"))))
+ '(default ((t (:background nil))))
  '(cfw:face-holiday ((t (:background "controlDarkShadowColor" :foreground "White" :weight bold))))
  '(cfw:face-select ((t (:background "textColor"))))
  '(cfw:face-title ((t (:inherit variable-pitch :foreground "Green" :weight bold :height 1.5))))
