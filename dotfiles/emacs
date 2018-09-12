@@ -352,8 +352,13 @@
   (define-key intero-mode-map (kbd "C-t") 'intero-type-at))
 
 ;; Set up the nix stuff
-(use-package nix-mode :ensure t)
-(use-package nix-buffer :ensure t)
+(use-package nix-mode
+  :ensure t
+  :pin melpa
+  :mode (("\\.nix\\'" . nix-mode)))
+
+(use-package nix-buffer
+  :ensure t)
 
 ;; Setup the Rust stuff
 (use-package rust-mode
@@ -412,6 +417,30 @@
   ;; Enable some modes
   (mapc (curry 'add-hook 'tuareg-mode-hook)
         '(whitespace-mode merlin-mode company-mode)))
+
+
+;; Set up the go stuff
+(use-package go-mode
+  :ensure t
+  :config
+  (evil-define-key 'normal go-mode-map (kbd "M-.") 'godef-jump))
+
+(use-package go-eldoc
+  :ensure t
+  :after go-mode)
+
+(use-package go-dlv
+  :ensure t
+  :after go-mode)
+
+(use-package company-go
+  :ensure t
+  :after go-mode
+  :config
+  (add-hook 'go-mode-hook
+            (lambda ()
+              (company-mode)
+              (set (make-local-variable 'company-backends) '(company-go)))))
 
 
 ;; Don't litter my directories with backup files
@@ -515,6 +544,9 @@
   :pin melpa
   :commands (kubernetes-overview))
 
+(use-package mustache-mode
+  :ensure t)
+
 (use-package kubernetes-evil
   :ensure t
   :after kubernetes
@@ -585,14 +617,14 @@
  '(line-number-mode nil)
  '(package-selected-packages
    (quote
-    (github-modern-theme flycheck-rust racer cargo rust-mode kubernetes-evil kubernetes kubernetes-el wttrin nix-mode slack color-theme w3m alert ## calfw-org calfw-ical calfw spotify fish-mode go-mode symon multi-term mu4e mu4e-conversation m4ue-conversation magithub mpdel doom-themes notmuch flycheck-yamllint oceanic-theme org-jira tuareg merlin evil-goggles groovy-mode smex ido-vertical-mode flx-ido grizzl fzf yaml-mode jabber projectile ensime markdown-mode key-seq key-chord xclip flatland-black-theme flatland-theme git-gutter+ solarized-theme molokai-theme use-package paredit sublime-themes blackboard-theme dracula-theme darktooth-theme magit parinfer slime evil)))
+    (go-dlv company-go go-eldoc mustache-mode github-modern-theme flycheck-rust racer cargo rust-mode kubernetes-evil kubernetes kubernetes-el wttrin nix-mode slack color-theme w3m alert ## calfw-org calfw-ical calfw spotify fish-mode go-mode symon multi-term mu4e mu4e-conversation m4ue-conversation magithub mpdel doom-themes notmuch flycheck-yamllint oceanic-theme org-jira tuareg merlin evil-goggles groovy-mode smex ido-vertical-mode flx-ido grizzl fzf yaml-mode jabber projectile ensime markdown-mode key-seq key-chord xclip flatland-black-theme flatland-theme git-gutter+ solarized-theme molokai-theme use-package paredit sublime-themes blackboard-theme dracula-theme darktooth-theme magit parinfer slime evil)))
  '(xterm-mouse-mode t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:background nil))))
+ '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "nil" :family "Envy Code R"))))
  '(cfw:face-holiday ((t (:background "controlDarkShadowColor" :foreground "White" :weight bold))))
  '(cfw:face-select ((t (:background "textColor"))))
  '(cfw:face-title ((t (:inherit variable-pitch :foreground "Green" :weight bold :height 1.5))))
