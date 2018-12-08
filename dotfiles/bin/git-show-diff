@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+#! nix-shell -i bash -p git
+
+commit_id="$@"
+
+git difftool ${commit_id}~ $commit_id --no-prompt
+
