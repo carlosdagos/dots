@@ -172,7 +172,7 @@
   ;; NOTE: TESTING FOR NOW
   (straight-use-package
    '(realgud-lldb :host github :repo "realgud/realgud-lldb"))
-  (require 'realgud-lldb))
+  (load "~/.emacs.d/straight/repos/realgud-lldb/realgud-lldb.el"))
 
 ;; Use eglot for rls support
 (use-package eglot
