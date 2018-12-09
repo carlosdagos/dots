@@ -13,7 +13,7 @@ function ecw --description 'Opens up emacsclient in windowed mode'
                                (require \'seq)
                                (let ((files (seq-filter (lambda (arg) (not (string-prefix-p \"-\" arg)))
                                                         (split-string \"$argv\" \" \"))))
-                                 (set-frame-font \"Envy Code R-13\")
+                                 (set-frame-font \"Envy Code R-9\")
                                  (tool-bar-mode -1)
                                  (loop for file in files
                                        do (find-file file))))' &"

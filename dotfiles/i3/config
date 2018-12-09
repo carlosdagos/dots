@@ -42,8 +42,8 @@ bindsym $mod+o exec rofi -show run
 # start rofi to switch programs
 bindsym $mod+a exec rofi -show
 # Control the volume
-bindsym $mod+Pause       exec amixer sset Master 10%+
-bindsym $mod+Scroll_Lock exec amixer sset Master 10%-
+bindsym $mod+Next  exec pactl -- set-sink-volume 0 +10%
+bindsym $mod+Prior exec pactl -- set-sink-volume 0 -10%
 # Control Spotify
 bindsym $mod+F6 exec spotify-controls previous
 bindsym $mod+F7 exec spotify-controls play-pause
@@ -176,12 +176,15 @@ client.background       #1d1d1d
 bar {
         status_command i3status -c /home/carlos/.config/i3/i3status.conf
         colors {
-                background #282828
-                statusline #FBF1C7
-                separator  #282828
-                focused_workspace  #D79921 #D79921 #1D2021
-                active_workspace   #83A598 #665C54 #F9F5D7
-                inactive_workspace #1D2021 #282828 #D5C4A1
-                urgent_workspace   #CC241D #9D0006 #FFFFFF
-        }
+		# Whole color settings
+		background #3c3836
+		statusline #ebdbb2
+		separator  #666666
+
+
+		focused_workspace  #458588 #458588 #ebdbb2
+		active_workspace   #83a598 #83a598 #ebdbb2
+		inactive_workspace #504945 #504945 #ebdbb2
+		urgent_workspace   #cc241d #cc241d #504945
+	}
 }
