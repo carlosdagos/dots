@@ -3,8 +3,7 @@
 #
 # -*- mode: sh -*-
 #
-# This will open a github commit in a browser
-
+# This will open a **Github** commit in a browser
 
 # Find the appropriate program to open a URL
 function open_cmd {
@@ -18,6 +17,11 @@ function open_cmd {
 # Open the commit in using the command available
 open_cmd=`open_cmd`
 repo_url=`git config remote.origin.url | sed "s/.git$//"`
+
+# Fix up the URL in case the repo was checked out with SSH
+if [[ $repo_url =~ ^git@ ]]; then
+    repo_url=`echo $repo_url | sed 's/:/\//' | sed 's|^git@|https://|'`
+fi
 
 if [[ $repo_url =~ "github" ]]; then
     $open_cmd "${repo_url}/commit/${1}"
