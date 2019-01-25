@@ -2,7 +2,7 @@
 
 [global]
     alignment = left
-    allow_markup = yes
+    markup = yes
     bounce_freq = 0
     browser = /run/current-system/sw/bin/google-chrome-stable
     dmenu = /run/current-system/sw/bin/dmenu -p dunst:
