@@ -1,13 +1,27 @@
 #!/usr/bin/env nix-shell
 #! nix-shell -i bash -p fzf git python36Packages.pygments
 #
+# -*- mode: sh -*-
+#
 # This will open the whole git log and allow to search using `fzf` while
 # showing the diff as a preview. When pressing enter it will show the whole
 # diff
+
+# Find the appropriate program to open URLS
+function open_cmd {
+    if [[ $(uname) =~ Darwin ]]; then
+        echo "open"
+    else
+        echo "xdg-open"
+    fi
+}
+
+open_cmd=`open_cmd`
+repo_url=`git config remote.origin.url`
 
 git-log --oneline "$@" | \
 fzf -e --no-sort --tiebreak=index \
     --preview="git show {+1} | pygmentize -l diff" \
     --preview-window left:50% \
-    --bind "enter:execute(git difftool {+1}~ {+1} --no-prompt)"
-
+    --bind "enter:execute(git difftool {+1}~ {+1} --no-prompt)" \
+    --bind "ctrl-g:execute($open_cmd '$repo_url/commit/{+1}')"
