@@ -60,23 +60,11 @@ bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 
-# alternatively, you can use the cursor keys:
-#bindsym $mod+Left focus left
-#bindsym $mod+Down focus down
-#bindsym $mod+Up focus up
-#bindsym $mod+Right focus right
-
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
-
-# alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # split in horizontal orientation
 bindsym $mod+Shift+v split h
@@ -139,31 +127,43 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
-# resize window (you can also use the mouse for that)
-mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
+# gaps stuff
+for_window [class="^.*"] border pixel 1
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+# ergonomic mode
+mode "ergo" {
+        # Open a terminal
+        bindsym t exec termite; mode "default"
+        bindsym b exec chromium https://duck.com; mode "default"
 
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym f fullscreen toggle
+        bindsym q kill
+        bindsym o exec rofi -show run; mode "default"
+        bindsym a exec rofi -show; mode "default"
 
-        # back to normal: Enter or Escape
+        # focus on a window
+        bindsym h focus left
+        bindsym j focus down
+        bindsym k focus up
+        bindsym l focus right
+
+        # move focused window
+        bindsym Shift+h move left
+        bindsym Shift+j move down
+        bindsym Shift+k move up
+        bindsym Shift+l move right
+
+        # resize
+        bindsym Left  resize shrink width  5 px or 5 ppt
+        bindsym Down  resize grow   height 5 px or 5 ppt
+        bindsym Up    resize shrink height 5 px or 5 ppt
+        bindsym Right resize grow   width  5 px or 5 ppt
+
+        # back to normal: Enter
         bindsym Return mode "default"
-        bindsym Escape mode "default"
 }
 
-bindsym $mod+r mode "resize"
+bindsym Escape mode "ergo"
 
 client.focused          #282828 #3C3836 #FBF1C7
 client.focused_inactive #1D2021 #191919 #999999
@@ -174,17 +174,16 @@ client.background       #1d1d1d
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status -c /home/carlos/.config/i3/i3status.conf
+        status_command i3status -c ~/.config/i3/i3status.conf
         colors {
-		# Whole color settings
-		background #3c3836
-		statusline #ebdbb2
-		separator  #666666
+            # Whole color settings
+            background #3c3836
+            statusline #ebdbb2
+            separator  #666666
 
-
-		focused_workspace  #458588 #458588 #ebdbb2
-		active_workspace   #83a598 #83a598 #ebdbb2
-		inactive_workspace #504945 #504945 #ebdbb2
-		urgent_workspace   #cc241d #cc241d #504945
-	}
+            focused_workspace  #458588 #458588 #ebdbb2
+            active_workspace   #83a598 #83a598 #ebdbb2
+            inactive_workspace #504945 #504945 #ebdbb2
+            urgent_workspace   #cc241d #cc241d #504945
+        }
 }
