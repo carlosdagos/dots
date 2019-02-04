@@ -84,7 +84,7 @@ bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+# bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 #bindsym $mod+a focus parent
@@ -163,7 +163,7 @@ mode "ergo" {
         bindsym Return mode "default"
 }
 
-bindsym Escape mode "ergo"
+bindsym $mod+space mode "ergo"
 
 client.focused          #282828 #3C3836 #FBF1C7
 client.focused_inactive #1D2021 #191919 #999999
