@@ -138,8 +138,8 @@ mode "ergo" {
 
         bindsym f fullscreen toggle
         bindsym q kill
-        bindsym o exec rofi -show run -font 'Envy Code R 13'; mode "default"
-        bindsym a exec rofi -show -font 'Envy Code R 13'; mode "default"
+        bindsym o exec rofi -show run    -font 'Envy Code R 13'; mode "default"
+        bindsym a exec rofi -show window -font 'Envy Code R 13'; mode "default"
 
         # focus on a window
         bindsym h focus left
@@ -154,10 +154,10 @@ mode "ergo" {
         bindsym Shift+l move right
 
         # resize
-        bindsym Left  resize shrink width  5 px or 5 ppt
-        bindsym Down  resize grow   height 5 px or 5 ppt
-        bindsym Up    resize shrink height 5 px or 5 ppt
-        bindsym Right resize grow   width  5 px or 5 ppt
+        bindsym Right resize shrink width  5 px or 5 ppt
+        bindsym Up    resize grow   height 5 px or 5 ppt
+        bindsym Down  resize shrink height 5 px or 5 ppt
+        bindsym Left  resize grow   width  5 px or 5 ppt
 
         # back to normal: Enter
         bindsym Return mode "default"

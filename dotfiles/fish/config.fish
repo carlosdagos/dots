@@ -1,11 +1,7 @@
 # My aliases
-alias nvim 'nvim -u ~/.nvimrc'
-alias bubu 'brew update ;and brew outdated ;and brew upgrade ;and brew cleanup'
-alias 1pass '1pass --path $HOME/Dropbox/1Password/1Password.agilekeychain'
-alias l 'ls -la'
-alias la 'ls -la'
-alias btc 'http https://api.cryptowat.ch/markets/kraken/btceur/summary | jq -r \'.result | .price.last\''
-alias ec 'emacsclient -t'
+alias nvim  'nvim -u ~/.nvimrc'
+alias l     'ls -la'
+alias la    'ls -la'
 
 set -gx LC_ALL en_US.UTF-8
 set -gx LANG en_US.UTF-8
@@ -16,10 +12,15 @@ function ecw --description 'Opens up emacsclient in windowed mode'
                                (require \'seq)
                                (let ((files (seq-filter (lambda (arg) (not (string-prefix-p \"-\" arg)))
                                                         (split-string \"$argv\" \" \"))))
-                                 (set-frame-font \"Envy Code R-13\")
+                                 (set-frame-font \"Envy Code R-9\")
                                  (tool-bar-mode -1)
                                  (loop for file in files
                                        do (find-file file))))' &"
+end
+
+function ec --description 'Opens up emacsclient in terminal mode'
+    echo "function fish_title; echo \"emacsclient -t $argv\"; end" | source
+    fish -c "emacsclient -t $argv"
 end
 
 alias emacs-is-stuck 'pkill -SIGUSR2 emacs'
