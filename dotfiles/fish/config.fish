@@ -19,8 +19,12 @@ function ecw --description 'Opens up emacsclient in windowed mode'
 end
 
 function ec --description 'Opens up emacsclient in terminal mode'
+    # Set the title of the terminal
     echo "function fish_title; echo \"emacsclient -t $argv\"; end" | source
+    # Open emacs
     fish -c "emacsclient -t $argv"
+    # When done, fix up the title of the terminal
+    echo "function fish_title; echo \"fish $PWD\"; end" | source
 end
 
 alias emacs-is-stuck 'pkill -SIGUSR2 emacs'
