@@ -4,6 +4,10 @@ font = Envy Code R 9
 cursor_shape = underscore
 cursor_blink = true
 
+scrollback_lines = 10000
+
+hyperlinks = false
+
 [colors]
 background = #1D2021
 foreground = #EBDBB2
