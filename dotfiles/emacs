@@ -140,6 +140,7 @@
 ;; Enable evil mode
 (use-package evil
   :ensure t
+  :after projectile
   :config
   (evil-mode 1)
   ;; I also don't like the default shortcut for indenting a region
@@ -149,6 +150,11 @@
   ;; Set up winner mode
   (progn
     (winner-mode)
+    (evil-global-set-key 'normal ",b" 'switch-to-buffer)
+    (evil-global-set-key 'normal ",k" 'kill-buffer)
+    (evil-global-set-key 'normal ",q" 'delete-window)
+    (evil-global-set-key 'normal ",p" 'projectile-find-file)
+    (evil-global-set-key 'normal ",d" 'split-window-horizontally)
     (evil-global-set-key
      'normal
      ",f"
@@ -537,6 +543,7 @@
 (use-package go-mode
   :ensure t
   :config
+  (add-hook 'go-mode-hook 'go-eldoc-setup)
   (add-hook 'go-mode-hook
             (lambda ()
               (add-hook 'before-save-hook 'gofmt-before-save nil 'local)))
@@ -762,5 +769,6 @@
  '(evil-goggles-undo-redo-remove-face ((t (:inherit diff-removed))))
  '(evil-goggles-yank-face ((t (:inherit diff-changed))))
  '(linum ((t nil)))
+ '(markdown-code-face ((t (:background "#2fae2fae2fae"))))
  '(underline ((t nil))))
 (put 'upcase-region 'disabled nil)
