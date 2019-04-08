@@ -4,7 +4,7 @@
     alignment = left
     markup = yes
     bounce_freq = 0
-    browser = /run/current-system/sw/bin/google-chrome-stable
+    browser = /run/current-system/sw/bin/firefox
     dmenu = /run/current-system/sw/bin/dmenu -p dunst:
     follow = none
     font = Envy Code R 12
