@@ -299,6 +299,7 @@
 ;; Setup magit
 (use-package magit
   :ensure t
+  :after evil
   :pin melpa-stable
   :ensure t
   :config
@@ -308,6 +309,7 @@
 ;; Set up paredit
 (use-package paredit
   :ensure t
+  :after evil
   :demand
   :config
   (progn
@@ -363,6 +365,8 @@
 
 
 (use-package scala-mode
+  :ensure t
+  :after evil
   :interpreter
   ("scala" . scala-mode)
   :init
@@ -470,6 +474,7 @@
 
 (use-package intero
   :ensure t
+  :after evil
   :init
   (add-hook 'haskell-mode-hook 'whitespace-mode)
   :config
