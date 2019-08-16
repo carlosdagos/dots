@@ -273,9 +273,8 @@
 ;; Up an 80 column rule
 (use-package whitespace
   :config
-  (setq whitespace-line-column 78) ;; limit line length
+  (setq whitespace-line-column 78) ;; default line length
   (setq whitespace-style '(face lines-tail)))
-
 
 ;; Enable the git gutter
 (use-package git-gutter+
@@ -486,8 +485,26 @@
   :pin melpa
   :mode (("\\.nix\\'" . nix-mode)))
 
-(use-package nix-buffer
+;; Use dhall
+(use-package dhall-mode
   :ensure t)
+
+;; Use Elm
+(use-package elm-mode
+  :ensure t)
+
+;; Use jq mode
+(use-package jq-mode
+  :ensure t)
+
+;; Enable a nix buffer when in Dhall or Haskell
+(use-package nix-buffer
+  :ensure t
+  :config
+  (add-hook 'dhall-mode-hook
+            (lambda ()
+              (message "Starting up nix-buffer")
+              (nix-buffer))))
 
 ;; Setup the Rust stuff
 (use-package rust-mode
@@ -777,3 +794,4 @@
  '(markdown-code-face ((t (:background "#2fae2fae2fae"))))
  '(underline ((t nil))))
 (put 'upcase-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
