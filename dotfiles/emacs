@@ -117,10 +117,11 @@
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
 ;; Setup my theme
-(use-package gruvbox-theme
-  :ensure t
+(use-package kaolin-themes
+;;  :ensure t
   :config
-  (load-theme 'gruvbox-dark-hard t))
+  (load-theme 'kaolin-dark t)
+  (kaolin-treemacs-theme))
 
 (use-package smart-mode-line
   :ensure t
@@ -626,6 +627,7 @@
 (use-package key-seq :ensure t)
 (use-package key-chord
   :ensure t
+  :after evil
   :after key-seq
   :config
   (key-chord-mode 1)

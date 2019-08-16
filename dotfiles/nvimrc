@@ -34,6 +34,7 @@ Plug 'morhetz/gruvbox'
 Plug 'raichoo/purescript-vim'
 Plug 'LnL7/vim-nix'
 Plug 'dag/vim-fish'
+Plug 'AlessandroYorba/Sierra'
 
 function! DoRemote(arg)
   UpdateRemotePlugins
@@ -137,7 +138,8 @@ set relativenumber
 set number
 let mapleader=','
 set backspace=2
-colorscheme gruvbox
+let g:sierra_Twilight = 1
+colorscheme sierra
 syntax on
 set laststatus=2
 set noshowmode

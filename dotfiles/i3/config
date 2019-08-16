@@ -128,7 +128,7 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # gaps stuff
-for_window [class="^.*"] border pixel 3
+for_window [class="^.*"] border pixel 2
 
 # ergonomic mode
 mode "ergo" {
@@ -163,14 +163,14 @@ mode "ergo" {
         bindsym Return mode "default"
 }
 
-bindsym $mod+space mode "ergo"
+#bindsym $mod+space mode "ergo"
 
 client.focused          #282828 #504945 #FBF1C7
 client.focused_inactive #1D2021 #191919 #999999
 #client.unfocused        #000000 #1D2021 #928374
 client.unfocused        #1D2021 #191919 #999999
-client.urgent           #cd989a #cd989a #2e3436
-client.background       #1d1d1d
+client.urgent           #CD989A #CD989A #2E3436
+client.background       #1D1D1D
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -178,13 +178,13 @@ bar {
         status_command i3status -c ~/.config/i3/i3status.conf
         colors {
             # Whole color settings
-            background #1D2021
-            statusline #ebdbb2
+            background #161618
+            statusline #EBDBB2
             separator  #666666
 
-            focused_workspace  #458588 #458588 #ebdbb2
-            active_workspace   #83a598 #83a598 #ebdbb2
-            inactive_workspace #504945 #504945 #ebdbb2
-            urgent_workspace   #cc241d #cc241d #504945
+            focused_workspace  #458588 #458588 #EBDBB2
+            active_workspace   #83A598 #83A598 #EBDBB2
+            inactive_workspace #504945 #504945 #EBDBB2
+            urgent_workspace   #CC241D #CC241D #504945
         }
 }

@@ -9,21 +9,22 @@ scrollback_lines = 10000
 hyperlinks = false
 
 [colors]
-background = #1D2021
+background = #161618
+#background = #1D2021
 foreground = #EBDBB2
 
 # black
-color0     = #1D2021
-color8     = #928374
+color0     = #161618
+color8     = #181818
 # red
-color1     = #CC241D
-color9     = #FB4934
+color1     = #c93237
+color9     = #cd5c60
 # green
-color2     = #98971A
-color10    = #B8BB26
+color2     = #39855f
+color10    = #65E6A7
 # yellow
-color3     = #D79921
-color11    = #FABD2F
+color3     = #a39423
+color11    = #c8c493
 # blue
 color4     = #458588
 color12    = #83A598
