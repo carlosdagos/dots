@@ -1,7 +1,0 @@
-#
-# mutt with patches useful on my os x installation
-#
-kevwil/patches/mutt --with-gpgme --with-trash-patch --with-sidebar-patch --with-confirm-attachment-patch --with-s-lang
-
-# Haskell mode with fixed bugs
-homebrew/emacs/haskell-mode --HEAD

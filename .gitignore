@@ -9,12 +9,7 @@
 # I mean, I'm scripting my entire setup
 # so what can be expected from me?
 #
-**.swp
-
-#
-# Ignore the log file
-#
-smm.log
+*.swp
 
 #
 # Ignore certificate files

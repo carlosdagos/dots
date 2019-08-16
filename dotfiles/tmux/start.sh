@@ -1,3 +1,2 @@
-#!/bin/bash
-source ~/.zshrc
+#!/usr/bin/env bash
 tmux new
