@@ -1,5 +1,5 @@
 [options]
-font = Envy Code R 9
+font = Iosevka 9
 
 cursor_shape = underscore
 cursor_blink = true

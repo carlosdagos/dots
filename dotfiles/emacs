@@ -710,6 +710,18 @@
 ;; Allow me to control spotify
 (use-package spotify :ensure t)
 
+;; For use with mutt (I think)
+(progn
+  (add-to-list 'auto-mode-alist '(".*mutt.*" . message-mode))
+  (setq mail-header-separator "")
+  (add-hook 'message-mode-hook 'auto-fill-mode)
+  (add-hook 'message-mode-hook 'whitespace-mode)
+  (define-key message-mode-map (kbd "C-c C-c")
+    '(lambda ()
+       (interactive)
+       (save-buffer)
+       (server-edit))))
+
 ;; Show me git blames per line
 (defun git-blame-line ()
   "Runs `git blame` on the current line and
