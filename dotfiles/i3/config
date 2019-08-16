@@ -34,16 +34,19 @@ floating_modifier $mod
 # start a terminal
 bindsym $mod+Return exec termite
 # lock the screen
-bindsym $mod+F11    exec i3lock -c 000000 -i ~/Downloads/Cthulu_snoopy.png
+bindsym $mod+Scroll_Lock exec i3lock -c 000000 -i ~/Downloads/Cthulu_snoopy.png
 # kill focused window
 bindsym $mod+Shift+q kill
 # start rofi (a program launcher)
 bindsym $mod+o exec rofi -show run -font 'Envy Code R 13'
 # start rofi to switch programs
 bindsym $mod+a exec rofi -show -font 'Envy Code R 13'
-# Control the volume
+# Control the volume (use different combinations)
 bindsym $mod+Next  exec pactl -- set-sink-volume 0 +10%
 bindsym $mod+Prior exec pactl -- set-sink-volume 0 -10%
+bindsym $mod+F12   exec pactl -- set-sink-volume 0 +10%
+bindsym $mod+F11   exec pactl -- set-sink-volume 0 -10%
+
 # Control Spotify
 bindsym $mod+F6 exec spotify-controls previous
 bindsym $mod+F7 exec spotify-controls play-pause

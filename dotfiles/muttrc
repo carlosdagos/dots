@@ -7,7 +7,6 @@ source ~/.mutt/gpg.rc
 
 # Folder hooks
 folder-hook 'personal' 'source ~/.mutt/accounts/personal'
-folder-hook 'work' 'source ~/.mutt/accounts/work'
 folder-hook . "push <collapse-all>\n"
 
 # Default account
@@ -15,7 +14,6 @@ source ~/.mutt/accounts/personal
 
 # Macros for switching accounts
 macro index <f2> '<sync-mailbox><enter-command>source ~/.mutt/accounts/personal<enter><change-folder>!<enter>'
-macro index <f3> '<sync-mailbox><enter-command>source ~/.mutt/accounts/work<enter><change-folder>!<enter>'
 
 source ~/.mutt/accounts/personal
 
@@ -33,7 +31,8 @@ set certificate_file =~/.mutt/certificates
 set alias_file=~/.mutt/aliases
 
 # Set editor to create new email
-set editor="nvim +13 -c 'set nobackup' -c 'set noswapfile' -c 'set nowritebackup' -c 'set tw=72 ft=mail noautoindent'"
+#set editor="nvim +13 -c 'set nobackup' -c 'set noswapfile' -c 'set nowritebackup' -c 'set tw=72 ft=mail noautoindent'"
+set editor="emacsclient -t"
 
 # main options
 set realname     = "Carlos D."

@@ -7,3 +7,5 @@
     cmd = "nvim -u ~/.nvimrc -d \"$LOCAL\" \"$REMOTE\" +'colorscheme gruvbox'"
 [alias]
     compare = log --left-right --graph --cherry-pick --oneline
+[credential]
+	helper = /home/carlos/.nix-profile/bin/pass-git-helper
