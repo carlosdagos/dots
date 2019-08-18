@@ -118,7 +118,7 @@
 
 ;; Setup my theme
 (use-package kaolin-themes
-;;  :ensure t
+  :ensure t
   :config
   (load-theme 'kaolin-dark t)
   (kaolin-treemacs-theme))
@@ -488,15 +488,15 @@
 
 ;; Use dhall
 (use-package dhall-mode
-  :ensure t)
+  :ensure t
+  :config
+  (setq dhall-format-arguments '("--ascii")))
 
 ;; Use Elm
-(use-package elm-mode
-  :ensure t)
+(use-package elm-mode :ensure t)
 
 ;; Use jq mode
-(use-package jq-mode
-  :ensure t)
+(use-package jq-mode :ensure t)
 
 ;; Enable a nix buffer when in Dhall or Haskell
 (use-package nix-buffer
@@ -530,7 +530,7 @@
    '(opam :host github :repo "emacs-pe/opam.el"))
   (opam-init))
 
-(use-package utop :ensure t)
+(use-package utop   :ensure t)
 (use-package merlin :ensure t)
 
 (use-package tuareg
@@ -565,6 +565,7 @@
 ;; Set up the go stuff
 (use-package go-mode
   :ensure t
+  :after go-eldoc
   :config
   (add-hook 'go-mode-hook 'go-eldoc-setup)
   (add-hook 'go-mode-hook
@@ -702,10 +703,6 @@
   :ensure t
   :after kubernetes
   :pin melpa)
-
-;; Enable Mustache syntax highlighting
-(use-package mustache-mode
-  :ensure t)
 
 ;; Allow me to control spotify
 (use-package spotify :ensure t)
