@@ -84,7 +84,7 @@
   (setq multi-term-program (executable-find "fish")))
 
 ;; Set my favorite font
-(add-to-list 'default-frame-alist '(font . "Envy Code R-13"))
+(add-to-list 'default-frame-alist '(font . "Luculent-13"))
 (if (string-equal system-type "darwin")
     (set-fontset-font t 'unicode "Apple Color Emoji" nil 'prepend))
 

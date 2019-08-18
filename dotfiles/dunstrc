@@ -7,7 +7,7 @@
     browser = /run/current-system/sw/bin/firefox
     dmenu = /run/current-system/sw/bin/dmenu -p dunst:
     follow = none
-    font = Envy Code R 12
+    font = Luculent 12
     format = "<b>%s</b>\n%b"
     geometry = "0-10+10"
     history_length = 20

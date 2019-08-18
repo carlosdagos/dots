@@ -29,7 +29,7 @@
 *color7:     #dddddd
 *color15:    #dddddd
 
-URxvt*font:               xft:Envy Code R:pixelsize=13
+URxvt*font:               xft:Luculent:pixelsize=13
 URxvt*borderColor:        #151515
 URxvt*colorBD:            #ffffff
 URxvt*cursorColor:        #ff8939

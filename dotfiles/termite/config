@@ -1,5 +1,5 @@
 [options]
-font = Iosevka 9
+font = Luculent 9
 
 cursor_shape = underscore
 cursor_blink = true

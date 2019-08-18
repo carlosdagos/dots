@@ -15,7 +15,7 @@ set $mod Mod1
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:Envy Code R 8
+font pango:Luculent 8
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -38,9 +38,9 @@ bindsym $mod+Scroll_Lock exec i3lock -c 000000 -i ~/Downloads/Cthulu_snoopy.png
 # kill focused window
 bindsym $mod+Shift+q kill
 # start rofi (a program launcher)
-bindsym $mod+o exec rofi -show run -font 'Envy Code R 13'
+bindsym $mod+o exec rofi -show run -font 'Luculent 13'
 # start rofi to switch programs
-bindsym $mod+a exec rofi -show -font 'Envy Code R 13'
+bindsym $mod+a exec rofi -show -font 'Luculent 13'
 # Control the volume (use different combinations)
 bindsym $mod+Next  exec pactl -- set-sink-volume 0 +10%
 bindsym $mod+Prior exec pactl -- set-sink-volume 0 -10%
@@ -130,47 +130,11 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
-# gaps stuff
+# Gaps stuff
 for_window [class="^.*"] border pixel 2
-
-# ergonomic mode
-mode "ergo" {
-        # Open a terminal
-        bindsym t exec termite; mode "default"
-        bindsym b exec chromium https://duck.com; mode "default"
-
-        bindsym f fullscreen toggle
-        bindsym q kill
-        bindsym o exec rofi -show run    -font 'Envy Code R 13'; mode "default"
-        bindsym a exec rofi -show window -font 'Envy Code R 13'; mode "default"
-
-        # focus on a window
-        bindsym h focus left
-        bindsym j focus down
-        bindsym k focus up
-        bindsym l focus right
-
-        # move focused window
-        bindsym Shift+h move left
-        bindsym Shift+j move down
-        bindsym Shift+k move up
-        bindsym Shift+l move right
-
-        # resize
-        bindsym Right resize shrink width  5 px or 5 ppt
-        bindsym Up    resize grow   height 5 px or 5 ppt
-        bindsym Down  resize shrink height 5 px or 5 ppt
-        bindsym Left  resize grow   width  5 px or 5 ppt
-
-        # back to normal: Enter
-        bindsym Return mode "default"
-}
-
-#bindsym $mod+space mode "ergo"
 
 client.focused          #282828 #504945 #FBF1C7
 client.focused_inactive #1D2021 #191919 #999999
-#client.unfocused        #000000 #1D2021 #928374
 client.unfocused        #1D2021 #191919 #999999
 client.urgent           #CD989A #CD989A #2E3436
 client.background       #1D1D1D
