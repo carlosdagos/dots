@@ -4,7 +4,7 @@
 [diff]
     tool = nvimdiff
 [difftool "nvimdiff"]
-    cmd = "nvim -u ~/.nvimrc -d \"$LOCAL\" \"$REMOTE\" +'colorscheme gruvbox'"
+    cmd = "nvim -u ~/.nvimrc -d \"$LOCAL\" \"$REMOTE\""
 [alias]
     compare = log --left-right --graph --cherry-pick --oneline
 [credential]
