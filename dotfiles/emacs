@@ -75,7 +75,8 @@
 
 
 ;; Please use bash for the shell (fish shell works clunky)
-(setq explicit-shell-file-name (executable-find "bash"))
+(setq explicit-shell-file-name (executable-find "sh"))
+(setq shell-file-name (executable-find "sh"))
 
 ;; Also use multi-term
 (use-package multi-term
@@ -119,17 +120,15 @@
 ;; Setup my theme
 (use-package kaolin-themes
   :ensure t
-  :config
-  (load-theme 'kaolin-dark t)
-  (kaolin-treemacs-theme))
+  :config (load-theme 'kaolin-mono-dark t))
 
-(use-package smart-mode-line
+
+(use-package doom-modeline
   :ensure t
-  :init
-  (setq sml/no-confirm-load-theme t)
-  (setq sml/theme 'respectful)
   :config
-  (sml/setup))
+  (doom-modeline-mode)
+  (setq doom-modeline-height 20)
+  (setq doom-modeline-icon nil))
 
 ;; Set up which-key
 (use-package which-key
@@ -152,10 +151,16 @@
   (progn
     (winner-mode)
     (evil-global-set-key 'normal ",b" 'switch-to-buffer)
-    (evil-global-set-key 'normal ",k" 'kill-buffer)
+    (evil-global-set-key 'normal ",k" 'kill-this-buffer)
     (evil-global-set-key 'normal ",q" 'delete-window)
     (evil-global-set-key 'normal ",p" 'projectile-find-file)
-    (evil-global-set-key 'normal ",d" 'split-window-horizontally)
+    (evil-global-set-key 'normal ",p" 'fill-paragraph)
+    (evil-global-set-key 'normal ",wh" 'evil-window-left)
+    (evil-global-set-key 'normal ",wl" 'evil-window-right)
+    (evil-global-set-key 'normal ",wj" 'evil-window-down)
+    (evil-global-set-key 'normal ",wk" 'evil-window-up)
+    (evil-global-set-key 'normal ",w-" 'evil-window-split)
+    (evil-global-set-key 'normal ",w|" 'evil-window-vsplit)
     (evil-global-set-key
      'normal
      ",f"
@@ -167,6 +172,20 @@
            (delete-other-windows)
          ;; Else, undo the fullscreen stuff
          (winner-undo))))))
+
+
+(use-package centaur-tabs
+  :ensure t
+  :after evil
+  :pin melpa
+  :config
+  (centaur-tabs-mode t)
+  (setq centaur-tabs-set-icons nil)
+  (setq centaur-tabs-set-bar 'under)
+  (setq x-underline-at-descent-line t)
+  (evil-global-set-key 'normal "L" 'centaur-tabs-forward)
+  (evil-global-set-key 'normal "H" 'centaur-tabs-backward))
+
 
 ;; Use highlight-indentation
 (use-package highlight-indentation
@@ -507,6 +526,12 @@
               (message "Starting up nix-buffer")
               (nix-buffer))))
 
+;; Use Graphviz
+(use-package graphviz-dot-mode
+  :ensure t
+  :config
+  (setq graphviz-dot-indent-width 2))
+
 ;; Setup the Rust stuff
 (use-package rust-mode
   :ensure t
@@ -535,10 +560,12 @@
 
 (use-package tuareg
   :ensure t
+  :mode (("dune\\'"         . scheme-mode)
+         ("dune-project\\'" . scheme-mode)
+         ("\\.merlin\\'"    . conf-mode))
   :config
   ;; Use Merlin
   (setq merlin-command 'opam)
-  (add-to-list 'auto-mode-alist '("/\\.merlin\\'" . conf-mode))
   (when (functionp 'merlin-document)
     (define-key tuareg-mode-map (kbd "\C-c\C-h") 'merlin-document))
   ;; Run Merlin if a .merlin file in the parent dirs is detected
@@ -547,6 +574,7 @@
               (let ((fn (buffer-file-name)))
                 (if (and fn (locate-dominating-file fn ".merlin"))
                     (merlin-mode)))))
+
   ;; Define some keys
   (evil-define-key 'normal tuareg-mode-map "t" 'merlin-type-enclosing)
   (evil-define-key 'visual tuareg-mode-map "t" 'merlin-type-enclosing)
@@ -561,6 +589,12 @@
   (mapc (curry 'add-hook 'tuareg-mode-hook)
         '(whitespace-mode merlin-mode company-mode)))
 
+;; Set up the F# stuff
+(use-package fsharp-mode
+  :ensure t
+  :config
+  (require 'eglot-fsharp)
+  (setq-default fsharp-indent-offset 2))
 
 ;; Set up the go stuff
 (use-package go-mode
@@ -669,30 +703,7 @@
   (define-key org-mode-map (kbd "M-n") 'evil-next-flyspell-error)
   (define-key org-mode-map (kbd "M-p") 'evil-prev-flyspell-error)
   (key-seq-define org-mode-map "fl" 'org-open-at-point)
-  (setq org-agenda-files '("~/Dropbox/Org")))
-
-;; Try to get Jira stuff here
-(use-package org-jira
-  :ensure t
-  :config
-  (setq jiralib-url "https://jira.odp.cba"))
-
-;; Try to get my calendar here
-(use-package calfw-ical
-  :ensure t
-  :after calfw)
-
-(use-package calfw-org
-  :ensure t
-  :after (key-seq calfw)
-  :config
-  (key-seq-define cfw:calendar-mode-map "vd" 'cfw:change-view-day)
-  (key-seq-define cfw:calendar-mode-map "vw" 'cfw:change-view-week)
-  (key-seq-define cfw:calendar-mode-map "vm" 'cfw:change-view-month)
-  (key-seq-define cfw:calendar-mode-map "vt" 'cfw:navi-goto-today-command))
-
-(use-package calfw
-  :ensure t)
+  (refresh-agenda-files))
 
 (use-package kubernetes
   :ensure t
@@ -754,7 +765,7 @@
  '(custom-enabled-themes nil)
  '(custom-safe-themes
    (quote
-    ("562c2a97808ab67d71c02d50f951231e4a6505f4014a01d82f8d88f5008bbe88" "0f1733ad53138ddd381267b4033bcb07f5e75cd7f22089c7e650f1bb28fc67f4" "bee55ba5e878d0584db9b2fb33f75c348a3008fcfe8e05ab8cae897ca604fd95" "9f08dacc5b23d5eaec9cccb6b3d342bd4fdb05faf144bdcd9c4b5859ac173538" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "cd4d1a0656fee24dc062b997f54d6f9b7da8f6dc8053ac858f15820f9a04a679" "30289fa8d502f71a392f40a0941a83842152a68c54ad69e0638ef52f04777a4c" "c1de07961a3b5b49bfd50080e7811eea9c949526084df8d64ce1b4e0fdc076ff" "dbade2e946597b9cda3e61978b5fcc14fa3afa2d3c4391d477bdaeff8f5638c5" "801a567c87755fe65d0484cb2bded31a4c5bb24fd1fe0ed11e6c02254017acb2" "439d4ce8295685fc36fc119a062d0283bb05436ae841b053af76e9a5e42bc670" "a5956ec25b719bf325e847864e16578c61d8af3e8a3d95f60f9040d02497e408" "62c81ae32320ceff5228edceeaa6895c029cc8f43c8c98a023f91b5b339d633f" "7d2e7a9a7944fbde74be3e133fc607f59fdbbab798d13bd7a05e38d35ce0db8d" "c856158cc996d52e2f48190b02f6b6f26b7a9abd5fea0c6ffca6740a1003b333" "ef98b560dcbd6af86fbe7fd15d56454f3e6046a3a0abd25314cfaaefd3744a9e" "f27c3fcfb19bf38892bc6e72d0046af7a1ded81f54435f9d4d09b3bff9c52fc1" "0daf22a3438a9c0998c777a771f23435c12a1d8844969a28f75820dd71ff64e1" "8a6f10b3269c42c351776ee32c7ee755472dee4ecdf2177dcbf64d5e02d1ab64" "d411730c6ed8440b4a2b92948d997c4b71332acf9bb13b31e9445da16445fe43" "90ea0413ad77ae560f150de2e3888da4a2088590209705306156a307899a37ec" "4ee4a855548a7a966fe8722401441499b0d8b2fcf3d12438f81e016b6efed0e6" "ed2b5df51c3e1f99207074f8a80beeb61757ab18970e43d57dec34fe21af2433" "ce0788113995714fd96970417e8e71d5182d02bc40cc7ffef307f5e01e55942f" "11878ac0a75f25057b217f74d9098adbd893dc1374da94d81f715b70f4efa00b" "7666b079fc1493b74c1f0c5e6857f3cf0389696f2d9b8791c892c696ab4a9b64" "2af26301bded15f5f9111d3a161b6bfb3f4b93ec34ffa95e42815396da9cb560" "4486ade2acbf630e78658cd6235a5c6801090c2694469a2a2b4b0e12227a64b9" "42b9d85321f5a152a6aef0cc8173e701f572175d6711361955ecfb4943fe93af" "ed0b4fc082715fc1d6a547650752cd8ec76c400ef72eb159543db1770a27caa7" "021720af46e6e78e2be7875b2b5b05344f4e21fad70d17af7acfd6922386b61e" "3fa81193ab414a4d54cde427c2662337c2cab5dd4eb17ffff0d90bca97581eb6" "4154caa8409ff2eb6f74c913741420e7103b9ea26c3c7d1a5a16592d0d2f43e0" "c90fd1c669f260120d32ddd20168343f5c717ca69e95d2f805e42e88430c340e" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "b571f92c9bfaf4a28cb64ae4b4cdbda95241cd62cf07d942be44dc8f46c491f4" "65d9573b64ec94844f95e6055fe7a82451215f551c45275ca5b78653d505bc42" "dc9a8d70c4f94a28aafc7833f8d05667601968e6c9bf998791c39fcb3e4679c9" "3cd28471e80be3bd2657ca3f03fbb2884ab669662271794360866ab60b6cb6e6" "72a81c54c97b9e5efcc3ea214382615649ebb539cb4f2fe3a46cd12af72c7607" "9b59e147dbbde5e638ea1cde5ec0a358d5f269d27bd2b893a0947c4a867e14c1" "d5b121d69e48e0f2a84c8e4580f0ba230423391a78fcb4001ccb35d02494d79e" "ff7625ad8aa2615eae96d6b4469fcc7d3d20b2e1ebc63b761a349bebbb9d23cb" "a1a966cf2e87be6a148158c79863440ba2e45aa06cc214341feafe5c6deca4f2" "2b6bd2ebad907ee42b3ffefa4831f348e3652ea8245570cdda67f0034f07db93" "7f3ef7724515515443f961ef87fee655750512473b1f5bf890e2dc7e065f240c" "125fd2180e880802ae98b85f282b17f0aa8fa6cb9fc4f33d7fb19a38c40acef0" "5a970147df34752ed45bfdf0729233abfc085d9673ae7e40210c5e2d8f624b08" "f6a935e77513ba40014aa8467c35961fdb1fc936fa48407ed437083a7ad932de" default)))
+    ("b35a14c7d94c1f411890d45edfb9dc1bd61c5becd5c326790b51df6ebf60f402" "93a0885d5f46d2aeac12bf6be1754faa7d5e28b27926b8aa812840fe7d0b7983" "f07729f5245b3c8b3c9bd1780cbe6f3028a9e1ed45cad7a15dd1a7323492b717" "030346c2470ddfdaca479610c56a9c2aa3e93d5de3a9696f335fd46417d8d3e4" "fa477d10f10aa808a2d8165a4f7e6cee1ab7f902b6853fbee911a9e27cf346bc" "6e38567da69b5110c8e19564b7b2792add8e78a31dfb270168509e7ae0147a8d" "24fc62afe2e5f0609e436aa2427b396adf9a958a8fa660edbaab5fb13c08aae6" "d1b4990bd599f5e2186c3f75769a2c5334063e9e541e37514942c27975700370" "6b2636879127bf6124ce541b1b2824800afc49c6ccd65439d6eb987dbf200c36" "562c2a97808ab67d71c02d50f951231e4a6505f4014a01d82f8d88f5008bbe88" "0f1733ad53138ddd381267b4033bcb07f5e75cd7f22089c7e650f1bb28fc67f4" "bee55ba5e878d0584db9b2fb33f75c348a3008fcfe8e05ab8cae897ca604fd95" "9f08dacc5b23d5eaec9cccb6b3d342bd4fdb05faf144bdcd9c4b5859ac173538" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "cd4d1a0656fee24dc062b997f54d6f9b7da8f6dc8053ac858f15820f9a04a679" "30289fa8d502f71a392f40a0941a83842152a68c54ad69e0638ef52f04777a4c" "c1de07961a3b5b49bfd50080e7811eea9c949526084df8d64ce1b4e0fdc076ff" "dbade2e946597b9cda3e61978b5fcc14fa3afa2d3c4391d477bdaeff8f5638c5" "801a567c87755fe65d0484cb2bded31a4c5bb24fd1fe0ed11e6c02254017acb2" "439d4ce8295685fc36fc119a062d0283bb05436ae841b053af76e9a5e42bc670" "a5956ec25b719bf325e847864e16578c61d8af3e8a3d95f60f9040d02497e408" "62c81ae32320ceff5228edceeaa6895c029cc8f43c8c98a023f91b5b339d633f" "7d2e7a9a7944fbde74be3e133fc607f59fdbbab798d13bd7a05e38d35ce0db8d" "c856158cc996d52e2f48190b02f6b6f26b7a9abd5fea0c6ffca6740a1003b333" "ef98b560dcbd6af86fbe7fd15d56454f3e6046a3a0abd25314cfaaefd3744a9e" "f27c3fcfb19bf38892bc6e72d0046af7a1ded81f54435f9d4d09b3bff9c52fc1" "0daf22a3438a9c0998c777a771f23435c12a1d8844969a28f75820dd71ff64e1" "8a6f10b3269c42c351776ee32c7ee755472dee4ecdf2177dcbf64d5e02d1ab64" "d411730c6ed8440b4a2b92948d997c4b71332acf9bb13b31e9445da16445fe43" "90ea0413ad77ae560f150de2e3888da4a2088590209705306156a307899a37ec" "4ee4a855548a7a966fe8722401441499b0d8b2fcf3d12438f81e016b6efed0e6" "ed2b5df51c3e1f99207074f8a80beeb61757ab18970e43d57dec34fe21af2433" "ce0788113995714fd96970417e8e71d5182d02bc40cc7ffef307f5e01e55942f" "11878ac0a75f25057b217f74d9098adbd893dc1374da94d81f715b70f4efa00b" "7666b079fc1493b74c1f0c5e6857f3cf0389696f2d9b8791c892c696ab4a9b64" "2af26301bded15f5f9111d3a161b6bfb3f4b93ec34ffa95e42815396da9cb560" "4486ade2acbf630e78658cd6235a5c6801090c2694469a2a2b4b0e12227a64b9" "42b9d85321f5a152a6aef0cc8173e701f572175d6711361955ecfb4943fe93af" "ed0b4fc082715fc1d6a547650752cd8ec76c400ef72eb159543db1770a27caa7" "021720af46e6e78e2be7875b2b5b05344f4e21fad70d17af7acfd6922386b61e" "3fa81193ab414a4d54cde427c2662337c2cab5dd4eb17ffff0d90bca97581eb6" "4154caa8409ff2eb6f74c913741420e7103b9ea26c3c7d1a5a16592d0d2f43e0" "c90fd1c669f260120d32ddd20168343f5c717ca69e95d2f805e42e88430c340e" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "b571f92c9bfaf4a28cb64ae4b4cdbda95241cd62cf07d942be44dc8f46c491f4" "65d9573b64ec94844f95e6055fe7a82451215f551c45275ca5b78653d505bc42" "dc9a8d70c4f94a28aafc7833f8d05667601968e6c9bf998791c39fcb3e4679c9" "3cd28471e80be3bd2657ca3f03fbb2884ab669662271794360866ab60b6cb6e6" "72a81c54c97b9e5efcc3ea214382615649ebb539cb4f2fe3a46cd12af72c7607" "9b59e147dbbde5e638ea1cde5ec0a358d5f269d27bd2b893a0947c4a867e14c1" "d5b121d69e48e0f2a84c8e4580f0ba230423391a78fcb4001ccb35d02494d79e" "ff7625ad8aa2615eae96d6b4469fcc7d3d20b2e1ebc63b761a349bebbb9d23cb" "a1a966cf2e87be6a148158c79863440ba2e45aa06cc214341feafe5c6deca4f2" "2b6bd2ebad907ee42b3ffefa4831f348e3652ea8245570cdda67f0034f07db93" "7f3ef7724515515443f961ef87fee655750512473b1f5bf890e2dc7e065f240c" "125fd2180e880802ae98b85f282b17f0aa8fa6cb9fc4f33d7fb19a38c40acef0" "5a970147df34752ed45bfdf0729233abfc085d9673ae7e40210c5e2d8f624b08" "f6a935e77513ba40014aa8467c35961fdb1fc936fa48407ed437083a7ad932de" default)))
  '(ensime-implicit-gutter-icons t)
  '(ensime-sem-high-faces
    (quote
@@ -776,11 +787,16 @@
  '(ensime-typecheck-interval 5)
  '(evil-goggles-async-duration 0.1)
  '(font-use-system-font t)
+ '(groovy-indent-offset 2)
+ '(ido-vertical-mode t)
+ '(js-indent-level 2)
  '(line-number-mode t)
  '(package-selected-packages
    (quote
     (utop opam go-dlv company-go go-eldoc mustache-mode github-modern-theme flycheck-rust racer cargo rust-mode kubernetes-evil kubernetes kubernetes-el wttrin nix-mode slack color-theme w3m alert ## calfw-org calfw-ical calfw spotify fish-mode go-mode symon multi-term mu4e mu4e-conversation m4ue-conversation magithub mpdel doom-themes notmuch flycheck-yamllint oceanic-theme org-jira tuareg merlin evil-goggles groovy-mode smex ido-vertical-mode flx-ido grizzl fzf yaml-mode jabber projectile ensime markdown-mode key-seq key-chord xclip flatland-black-theme flatland-theme git-gutter+ solarized-theme molokai-theme use-package paredit sublime-themes blackboard-theme dracula-theme darktooth-theme magit parinfer slime evil)))
  '(size-indication-mode t)
+ '(tab-width 2)
+ '(tuareg-prettify-symbols-full t)
  '(xterm-mouse-mode t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -803,6 +819,7 @@
  '(evil-goggles-yank-face ((t (:inherit diff-changed))))
  '(linum ((t nil)))
  '(markdown-code-face ((t (:background "#2fae2fae2fae"))))
+ '(tuareg-font-lock-extension-node-face ((t nil)))
  '(underline ((t nil))))
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
