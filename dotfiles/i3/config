@@ -38,14 +38,15 @@ bindsym $mod+Scroll_Lock exec i3lock -c 000000 -i ~/Downloads/Cthulu_snoopy.png
 # kill focused window
 bindsym $mod+Shift+q kill
 # start rofi (a program launcher)
-bindsym $mod+o exec rofi -show run
+bindsym $mod+o exec rofi -show drun
 # start rofi to switch programs
-bindsym $mod+a exec rofi -show
+bindsym $mod+a exec rofi -show window
 # Control the volume (use different combinations)
-bindsym $mod+Next  exec pactl -- set-sink-volume 0 +10%
-bindsym $mod+Prior exec pactl -- set-sink-volume 0 -10%
-bindsym $mod+F12   exec pactl -- set-sink-volume 0 +10%
-bindsym $mod+F11   exec pactl -- set-sink-volume 0 -10%
+bindsym $mod+F1    exec amixer sset 'Master' toggle
+bindsym $mod+F2    exec amixer sset 'Master' 10%-
+bindsym $mod+F3    exec amixer sset 'Master' 10%+
+bindsym $mod+Next  exec amixer sset 'Master' 10%+
+bindsym $mod+Prior exec amixer sset 'Master' 10%-
 
 # Control Spotify
 bindsym $mod+F6 exec --no-startup-id playerctl previous

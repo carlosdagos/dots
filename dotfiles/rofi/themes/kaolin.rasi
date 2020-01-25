@@ -1,0 +1,171 @@
+//----------------------
+// Theme Settings
+//----------------------
+
+//----------------------
+// Colors
+//----------------------
+
+* {
+    kaolin0:			 #181818;
+    kaolin1: 			 #3B4252;
+    kaolin2: 			 #434C5E;
+    kaolin3: 			 #303035;
+
+    kaolin4: 			 #e6e6e8;
+    kaolin5:  			 #E5E9F0;
+    kaolin6:  			 #ECEFF4;
+    kaolin7: 			 #8FBCBB;
+
+    kaolin8:   			 #88C0D0;
+    kaolin9:  			 #81A1C1;
+    kaolin10: 			 #353b3c;
+    kaolin11: 			 #BF616A;
+
+    kaolin12: 			 #D08770;
+    kaolin13: 			 #EBCB8B;
+    kaolin14: 			 #A3BE8C;
+    kaolin15: 			 #B48EAD;
+
+    active-background:           @background;
+    active-foreground:           @foreground;
+
+    alternate-active-background: @kaolin0;
+    alternate-active-foreground: @active-foreground;
+    alternate-normal-background: @kaolin0;
+    alternate-normal-foreground: @foreground;
+    alternate-urgent-background: @kaolin0;
+    alternate-urgent-foreground: @urgent-foreground;
+
+    background-color:            @background;
+    background:                  @kaolin0;
+
+    border-color:                @kaolin10;
+    bordercolor:                 @kaolin10;
+
+    foreground:                  @kaolin4;
+
+    normal-background:           @background;
+    normal-foreground:           @foreground;
+
+    selected-active-background:  @kaolin3;
+    selected-active-foreground:  @foreground;
+    selected-normal-background:  @kaolin3;
+    selected-normal-foreground:  @kaolin4;
+    selected-urgent-background:  @kaolin3;
+    selected-urgent-foreground:  @kaolin4;
+
+    separatorcolor:              @blue;
+
+    spacing:                     2;
+
+    urgent-background:           @background;
+    urgent-foreground:           @foreground;
+}
+
+//----------------------
+// Style
+//----------------------
+
+#window {
+    background-color: @background;
+}
+
+#mainbox {
+    border:  1;
+    padding: 10;
+}
+
+#message {
+    border:       2px 2px 2px ;
+    border-color: @separatorcolor;
+    padding:      10 ;
+}
+
+#textbox {
+    text-color: @foreground;
+}
+
+#listview {
+    fixed-height: 0;
+    padding:	  5 0 0;
+    spacing:      5px ;
+}
+
+#element {
+    border:  0;
+    padding: 5px ;
+}
+
+#element.normal.normal {
+    background-color: @normal-background;
+    text-color:       @normal-foreground;
+}
+
+#element.normal.urgent {
+    background-color: @urgent-background;
+    text-color:       @urgent-foreground;
+}
+
+#element.normal.active {
+    background-color: @active-background;
+    text-color:       @active-foreground;
+}
+
+#element.selected.normal {
+    background-color: @selected-normal-background;
+    text-color:       @selected-normal-foreground;
+}
+
+#element.selected.urgent {
+    background-color: @selected-urgent-background;
+    text-color:       @selected-urgent-foreground;
+}
+
+#element.selected.active {
+    background-color: @selected-active-background;
+    text-color:       @selected-active-foreground;
+}
+
+#element.alternate.normal {
+    background-color: @alternate-normal-background;
+    text-color:       @alternate-normal-foreground;
+}
+
+#element.alternate.urgent {
+    background-color: @alternate-urgent-background;
+    text-color:       @alternate-urgent-foreground;
+}
+
+#element.alternate.active {
+    background-color: @alternate-active-background;
+    text-color:       @alternate-active-foreground;
+}
+
+#button.selected {
+    background-color: @selected-normal-background;
+    text-color:       @selected-normal-foreground;
+}
+
+#inputbar {
+    spacing:    5;
+    text-color: @normal-foreground;
+    padding:    5px ;
+    border:	0 0 1;
+    border-color: @separatorcolor;
+}
+
+#case-indicator {
+    spacing:    0;
+    text-color: @normal-foreground;
+}
+
+#entry {
+    spacing:    0;
+    text-color: @normal-foreground;
+}
+
+#prompt {
+    spacing:    0;
+    text-color: @normal-foreground;
+}

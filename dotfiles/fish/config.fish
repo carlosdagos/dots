@@ -42,6 +42,9 @@ alias emacs-is-stuck 'pkill -SIGUSR2 emacs'
 # Use emacsclient as my editor
 set -gx EDITOR 'emacsclient -t'
 
+# Set up direnv hook
+direnv hook fish | source
+
 # Load the opam env if it's installed
 if type -q opam
     eval (opam config env --shell=fish)

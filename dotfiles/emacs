@@ -120,8 +120,14 @@
 ;; Setup my theme
 (use-package kaolin-themes
   :ensure t
-  :config (load-theme 'kaolin-mono-dark t))
+  :config
+  (load-theme 'kaolin-mono-dark t))
 
+;; Use direnv
+(use-package direnv
+  :ensure t
+  :config
+  (direnv-mode))
 
 (use-package doom-modeline
   :ensure t
@@ -596,6 +602,14 @@
   (require 'eglot-fsharp)
   (setq-default fsharp-indent-offset 2))
 
+;; Set up Jupyter Notebook mode for Python
+(use-package ein
+  :ensure t
+  :pin melpa
+  :config
+  (require 'ein-notebook)
+  (require 'ein-subpackages))
+
 ;; Set up the go stuff
 (use-package go-mode
   :ensure t
@@ -702,8 +716,7 @@
   (add-hook 'org-mode-hook 'flyspell-mode)
   (define-key org-mode-map (kbd "M-n") 'evil-next-flyspell-error)
   (define-key org-mode-map (kbd "M-p") 'evil-prev-flyspell-error)
-  (key-seq-define org-mode-map "fl" 'org-open-at-point)
-  (refresh-agenda-files))
+  (key-seq-define org-mode-map "fl" 'org-open-at-point))
 
 (use-package kubernetes
   :ensure t
