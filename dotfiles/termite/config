@@ -14,8 +14,8 @@ background = #161618
 foreground = #EBDBB2
 
 # black
-color0     = #161618
-color8     = #181818
+color0     = #121212
+color8     = #6c6c6c
 # red
 color1     = #c93237
 color9     = #cd5c60

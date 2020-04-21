@@ -66,7 +66,7 @@ function setup_dotfiles {
   soft_link "dotfiles/gitconfig"         "$HOME/.gitconfig"
   soft_link "dotfiles/vimrc"             "$HOME/.vimrc"
   soft_link "dotfiles/nvimrc"            "$HOME/.nvimrc"
-  soft_link "dotfiles/emacs"             "$HOME/.emacs"
+  soft_link "dotfiles/doom.d"            "$HOME/.doom.d"
   soft_link "dotfiles/muttrc"            "$HOME/.muttrc"
   soft_link "dotfiles/mutt"              "$HOME/.mutt"
   soft_link "dotfiles/msmtprc"           "$HOME/.msmtprc"

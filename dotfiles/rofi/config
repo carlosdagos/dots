@@ -1,1 +1,3 @@
 rofi.theme: ~/.config/rofi/themes/kaolin.rasi
+rofi.show-icons: true
+rofi.font: Luculent 20
